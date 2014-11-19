@@ -11,7 +11,7 @@ import java.awt.BorderLayout;
 
 public class RoomstatusWindow {
 
-	private JFrame frame;
+	private JFrame frmRoomstatus;
 	private JTable tableRoom;
 	private JButton btnClose;
 
@@ -23,7 +23,7 @@ public class RoomstatusWindow {
 			public void run() {
 				try {
 					RoomstatusWindow window = new RoomstatusWindow();
-					window.frame.setVisible(true);
+					window.frmRoomstatus.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,15 +42,15 @@ public class RoomstatusWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setTitle("Zimmerstatus");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmRoomstatus = new JFrame();
+		frmRoomstatus.setBounds(100, 100, 450, 300);
+		frmRoomstatus.setTitle("Zimmerstatus");
+		frmRoomstatus.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmRoomstatus.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 0, 434, 219);
-		frame.getContentPane().add(scrollPane);
+		frmRoomstatus.getContentPane().add(scrollPane);
 		
 		tableRoom = new JTable();
 		tableRoom.setModel(new DefaultTableModel(
@@ -67,6 +67,15 @@ public class RoomstatusWindow {
 		
 		btnClose = new JButton("Schlie\u00DFen");
 		btnClose.setBounds(149, 230, 134, 23);
-		frame.getContentPane().add(btnClose);
+		frmRoomstatus.getContentPane().add(btnClose);
 	}
+
+	public JFrame getFrmRoomstatus() {
+		return frmRoomstatus;
+	}
+
+	public void setFrmRoomstatus(JFrame frmRoomstatus) {
+		this.frmRoomstatus = frmRoomstatus;
+	}
+	
 }

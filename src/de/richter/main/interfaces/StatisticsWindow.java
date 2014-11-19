@@ -11,7 +11,7 @@ import javax.swing.JButton;
 
 public class StatisticsWindow {
 
-	private JFrame frame;
+	private JFrame frmStatistics;
 	private JTable table;
 	private JTextField textGuestday;
 	private JTextField texGuestcame;
@@ -25,7 +25,7 @@ public class StatisticsWindow {
 			public void run() {
 				try {
 					StatisticsWindow window = new StatisticsWindow();
-					window.frame.setVisible(true);
+					window.frmStatistics.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,11 +44,11 @@ public class StatisticsWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 280, 210);
-		frame.setTitle("Statistiken");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmStatistics = new JFrame();
+		frmStatistics.setBounds(100, 100, 280, 210);
+		frmStatistics.setTitle("Statistiken");
+		frmStatistics.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmStatistics.getContentPane().setLayout(null);
 		
 		table = new JTable();
 		table.setBounds(10, 241, 464, -221);
@@ -59,37 +59,46 @@ public class StatisticsWindow {
 				"Zimmernr.", "Art", "Pl\u00E4tze", "belegt bis", "Gastnr."
 			}
 		));
-		frame.getContentPane().add(table);
+		frmStatistics.getContentPane().add(table);
 		
 		JLabel LabelGuestday = new JLabel("G\u00E4ste/Tag:");
 		LabelGuestday.setBounds(30, 31, 189, 14);
-		frame.getContentPane().add(LabelGuestday);
+		frmStatistics.getContentPane().add(LabelGuestday);
 		
 		JLabel LabelGuesthere = new JLabel("G\u00E4ste angereist:");
 		LabelGuesthere.setBounds(30, 62, 189, 14);
-		frame.getContentPane().add(LabelGuesthere);
+		frmStatistics.getContentPane().add(LabelGuesthere);
 		
 		JLabel LabelGuestaway = new JLabel("G\u00E4ste abgereist:");
 		LabelGuestaway.setBounds(30, 90, 189, 14);
-		frame.getContentPane().add(LabelGuestaway);
+		frmStatistics.getContentPane().add(LabelGuestaway);
 		
 		textGuestday = new JTextField();
 		textGuestday.setBounds(133, 31, 86, 20);
-		frame.getContentPane().add(textGuestday);
+		frmStatistics.getContentPane().add(textGuestday);
 		textGuestday.setColumns(10);
 		
 		texGuestcame = new JTextField();
 		texGuestcame.setColumns(10);
 		texGuestcame.setBounds(133, 59, 86, 20);
-		frame.getContentPane().add(texGuestcame);
+		frmStatistics.getContentPane().add(texGuestcame);
 		
 		textGuestaway = new JTextField();
 		textGuestaway.setColumns(10);
 		textGuestaway.setBounds(133, 87, 86, 20);
-		frame.getContentPane().add(textGuestaway);
+		frmStatistics.getContentPane().add(textGuestaway);
 		
 		JButton btnClose = new JButton("Schlie\u00DFen");
 		btnClose.setBounds(83, 131, 95, 29);
-		frame.getContentPane().add(btnClose);
+		frmStatistics.getContentPane().add(btnClose);
 	}
+
+	public JFrame getFrmStatistics() {
+		return frmStatistics;
+	}
+
+	public void setFrmStatistics(JFrame frmStatistics) {
+		this.frmStatistics = frmStatistics;
+	}
+	
 }

@@ -67,14 +67,32 @@ public class MainWindow {
 		frmHotelprogramm.getContentPane().add(btnCheckin);
 		
 		JButton btnCheckout = new JButton("Auschecken");
+		btnCheckout.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent arg0) {
+				CheckoutWindow checkoutWindow = new CheckoutWindow();
+				checkoutWindow.getFrmAuschecken().setVisible(true);
+			}
+		});
 		btnCheckout.setBounds(25, 97, 188, 63);
 		frmHotelprogramm.getContentPane().add(btnCheckout);
 		
 		JButton btnRoomstatus = new JButton("Zimmerstatus");
+		btnRoomstatus.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent arg0) {
+				RoomstatusWindow roomstatusWindow = new RoomstatusWindow();
+				roomstatusWindow.getFrmRoomstatus().setVisible(true);
+			}
+		});
 		btnRoomstatus.setBounds(25, 172, 188, 63);
 		frmHotelprogramm.getContentPane().add(btnRoomstatus);
 		
 		JButton btnStatistics = new JButton("Statistiken");
+		btnStatistics.addActionListener(new ActionListener() {
+			public void actionPerformed (ActionEvent arg0) {
+				StatisticsWindow statisticsWindow = new StatisticsWindow();
+				statisticsWindow.getFrmStatistics().setVisible(true);
+			}
+		});
 		btnStatistics.setBounds(25, 249, 188, 51);
 		frmHotelprogramm.getContentPane().add(btnStatistics);
 	}
