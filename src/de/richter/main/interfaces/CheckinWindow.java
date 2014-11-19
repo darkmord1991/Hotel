@@ -21,18 +21,18 @@ import javax.swing.JButton;
 public class CheckinWindow {
 
 	private JFrame frmEinchecken;
-	private JTextField textFrom;
-	private JTextField textTo;
-	private JTextField textName;
-	private JTextField textPrename;
-	private JTextField textStreet;
-	private JTextField textNumber;
-	private JTextField textPostcode;
-	private JTextField textCity;
-	private JTextField textMail;
-	private JTextField textPhone;
-	private JTable checkinTable;
-	private JTextField textGuestnumber;
+	private JTextField textFieldFrom;
+	private JTextField textFieldTo;
+	private JTextField textFieldName;
+	private JTextField textFieldPrename;
+	private JTextField textFieldStreet;
+	private JTextField textFieldNumber;
+	private JTextField textFieldPostcode;
+	private JTextField textFieldCity;
+	private JTextField textFieldMail;
+	private JTextField textFieldPhone;
+	private JTable tableCeckin;
+	private JTextField textFieldGuestnumber;
 
 	/**
 	 * Launch the application.
@@ -67,95 +67,95 @@ public class CheckinWindow {
 		frmEinchecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEinchecken.getContentPane().setLayout(null);
 		
-		textFrom = new JTextField();
-		textFrom.setBounds(25, 64, 86, 20);
-		frmEinchecken.getContentPane().add(textFrom);
-		textFrom.setColumns(10);
+		textFieldFrom = new JTextField();
+		textFieldFrom.setBounds(25, 64, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldFrom);
+		textFieldFrom.setColumns(10);
 		
-		textTo = new JTextField();
-		textTo.setBounds(25, 120, 86, 20);
-		frmEinchecken.getContentPane().add(textTo);
-		textTo.setColumns(10);
+		textFieldTo = new JTextField();
+		textFieldTo.setBounds(25, 120, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldTo);
+		textFieldTo.setColumns(10);
 		
-		JLabel LabelFrom = new JLabel("von");
-		LabelFrom.setBounds(25, 39, 86, 14);
-		frmEinchecken.getContentPane().add(LabelFrom);
+		JLabel lblFrom = new JLabel("von");
+		lblFrom.setBounds(25, 39, 86, 14);
+		frmEinchecken.getContentPane().add(lblFrom);
 		
-		JLabel LabelTo = new JLabel("bis");
-		LabelTo.setBounds(25, 95, 86, 14);
-		frmEinchecken.getContentPane().add(LabelTo);
+		JLabel lblTo = new JLabel("bis");
+		lblTo.setBounds(25, 95, 86, 14);
+		frmEinchecken.getContentPane().add(lblTo);
 		
-		JLabel LabelName = new JLabel("Name");
-		LabelName.setBounds(172, 39, 46, 14);
-		frmEinchecken.getContentPane().add(LabelName);
+		JLabel lblName = new JLabel("Name");
+		lblName.setBounds(172, 39, 46, 14);
+		frmEinchecken.getContentPane().add(lblName);
 		
-		textName = new JTextField();
-		textName.setColumns(10);
-		textName.setBounds(172, 64, 86, 20);
-		frmEinchecken.getContentPane().add(textName);
+		textFieldName = new JTextField();
+		textFieldName.setColumns(10);
+		textFieldName.setBounds(172, 64, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldName);
 		
-		textPrename = new JTextField();
-		textPrename.setColumns(10);
-		textPrename.setBounds(270, 64, 86, 20);
-		frmEinchecken.getContentPane().add(textPrename);
+		textFieldPrename = new JTextField();
+		textFieldPrename.setColumns(10);
+		textFieldPrename.setBounds(270, 64, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldPrename);
 		
-		JLabel LabelStreet = new JLabel("Stra\u00DFe");
-		LabelStreet.setBounds(172, 95, 86, 14);
-		frmEinchecken.getContentPane().add(LabelStreet);
+		JLabel lblStreet = new JLabel("Stra\u00DFe");
+		lblStreet.setBounds(172, 95, 86, 14);
+		frmEinchecken.getContentPane().add(lblStreet);
 		
-		JLabel LabelPrename = new JLabel("Vorname");
-		LabelPrename.setBounds(270, 39, 86, 14);
-		frmEinchecken.getContentPane().add(LabelPrename);
+		JLabel lblPrename = new JLabel("Vorname");
+		lblPrename.setBounds(270, 39, 86, 14);
+		frmEinchecken.getContentPane().add(lblPrename);
 		
-		textStreet = new JTextField();
-		textStreet.setColumns(10);
-		textStreet.setBounds(172, 120, 86, 20);
-		frmEinchecken.getContentPane().add(textStreet);
+		textFieldStreet = new JTextField();
+		textFieldStreet.setColumns(10);
+		textFieldStreet.setBounds(172, 120, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldStreet);
 		
-		textNumber = new JTextField();
-		textNumber.setColumns(10);
-		textNumber.setBounds(270, 120, 86, 20);
-		frmEinchecken.getContentPane().add(textNumber);
+		textFieldNumber = new JTextField();
+		textFieldNumber.setColumns(10);
+		textFieldNumber.setBounds(270, 120, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldNumber);
 		
-		JLabel LabelNumber = new JLabel("Hausnummer");
-		LabelNumber.setBounds(270, 95, 86, 14);
-		frmEinchecken.getContentPane().add(LabelNumber);
+		JLabel lblNumber = new JLabel("Hausnummer");
+		lblNumber.setBounds(270, 95, 86, 14);
+		frmEinchecken.getContentPane().add(lblNumber);
 		
-		JLabel LabelPostcode = new JLabel("Postleitzahl");
-		LabelPostcode.setBounds(172, 155, 184, 14);
-		frmEinchecken.getContentPane().add(LabelPostcode);
+		JLabel lblPostcode = new JLabel("Postleitzahl");
+		lblPostcode.setBounds(172, 155, 184, 14);
+		frmEinchecken.getContentPane().add(lblPostcode);
 		
-		JLabel LabelCity = new JLabel("Stadt");
-		LabelCity.setBounds(251, 155, 105, 14);
-		frmEinchecken.getContentPane().add(LabelCity);
+		JLabel lblCity = new JLabel("Stadt");
+		lblCity.setBounds(251, 155, 105, 14);
+		frmEinchecken.getContentPane().add(lblCity);
 		
-		textPostcode = new JTextField();
-		textPostcode.setColumns(10);
-		textPostcode.setBounds(172, 180, 69, 20);
-		frmEinchecken.getContentPane().add(textPostcode);
+		textFieldPostcode = new JTextField();
+		textFieldPostcode.setColumns(10);
+		textFieldPostcode.setBounds(172, 180, 69, 20);
+		frmEinchecken.getContentPane().add(textFieldPostcode);
 		
-		textCity = new JTextField();
-		textCity.setColumns(10);
-		textCity.setBounds(251, 180, 105, 20);
-		frmEinchecken.getContentPane().add(textCity);
+		textFieldCity = new JTextField();
+		textFieldCity.setColumns(10);
+		textFieldCity.setBounds(251, 180, 105, 20);
+		frmEinchecken.getContentPane().add(textFieldCity);
 		
-		JLabel LabelMail = new JLabel("E-Mail");
-		LabelMail.setBounds(172, 211, 184, 14);
-		frmEinchecken.getContentPane().add(LabelMail);
+		JLabel lblMail = new JLabel("E-Mail");
+		lblMail.setBounds(172, 211, 184, 14);
+		frmEinchecken.getContentPane().add(lblMail);
 		
-		textMail = new JTextField();
-		textMail.setColumns(10);
-		textMail.setBounds(172, 230, 184, 20);
-		frmEinchecken.getContentPane().add(textMail);
+		textFieldMail = new JTextField();
+		textFieldMail.setColumns(10);
+		textFieldMail.setBounds(172, 230, 184, 20);
+		frmEinchecken.getContentPane().add(textFieldMail);
 		
-		JLabel LabelPhone = new JLabel("Telefon");
-		LabelPhone.setBounds(172, 262, 105, 14);
-		frmEinchecken.getContentPane().add(LabelPhone);
+		JLabel lblPhone = new JLabel("Telefon");
+		lblPhone.setBounds(172, 262, 105, 14);
+		frmEinchecken.getContentPane().add(lblPhone);
 		
-		textPhone = new JTextField();
-		textPhone.setColumns(10);
-		textPhone.setBounds(172, 287, 86, 20);
-		frmEinchecken.getContentPane().add(textPhone);
+		textFieldPhone = new JTextField();
+		textFieldPhone.setColumns(10);
+		textFieldPhone.setBounds(172, 287, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldPhone);
 		
 		JComboBox comboBoxPersons = new JComboBox();
 		comboBoxPersons.setBounds(391, 64, 96, 20);
@@ -173,16 +173,16 @@ public class CheckinWindow {
 		comboBoxPension.setBounds(391, 139, 96, 20);
 		frmEinchecken.getContentPane().add(comboBoxPension);
 		
-		JLabel LabelRoom = new JLabel("Zimmerkategorie");
-		LabelRoom.setBounds(391, 170, 123, 14);
-		frmEinchecken.getContentPane().add(LabelRoom);
+		JLabel lblRoom = new JLabel("Zimmerkategorie");
+		lblRoom.setBounds(391, 170, 123, 14);
+		frmEinchecken.getContentPane().add(lblRoom);
 		
 		JComboBox comboBoxRoom = new JComboBox();
 		comboBoxRoom.setBounds(391, 205, 96, 20);
 		frmEinchecken.getContentPane().add(comboBoxRoom);
 		
-		checkinTable = new JTable();
-		checkinTable.setModel(new DefaultTableModel(
+		tableCeckin = new JTable();
+		tableCeckin.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null, null, null},
 				{null, null, null, null, null},
@@ -193,39 +193,39 @@ public class CheckinWindow {
 				"Zimmernr.", "Besetzt", "Gastnr.", "Personenanz.", "Zimmerart"
 			}
 		));
-		checkinTable.getColumnModel().getColumn(3).setPreferredWidth(81);
-		checkinTable.getColumnModel().getColumn(3).setMinWidth(19);
-		checkinTable.getColumnModel().getColumn(4).setPreferredWidth(70);
-		checkinTable.setBounds(545, 11, 329, 336);
+		tableCeckin.getColumnModel().getColumn(3).setPreferredWidth(81);
+		tableCeckin.getColumnModel().getColumn(3).setMinWidth(19);
+		tableCeckin.getColumnModel().getColumn(4).setPreferredWidth(70);
+		tableCeckin.setBounds(545, 11, 329, 336);
 		
-		JLabel LabelTime = new JLabel("Zeiterfassung");
-		LabelTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		LabelTime.setBounds(25, 11, 110, 22);
-		frmEinchecken.getContentPane().add(LabelTime);
+		JLabel lblTime = new JLabel("Zeiterfassung");
+		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTime.setBounds(25, 11, 110, 22);
+		frmEinchecken.getContentPane().add(lblTime);
 		
-		JLabel LabellBenutzerdaten = new JLabel("Benutzerdaten");
-		LabellBenutzerdaten.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		LabellBenutzerdaten.setBounds(167, 11, 189, 22);
-		frmEinchecken.getContentPane().add(LabellBenutzerdaten);
+		JLabel lblBenutzerdaten = new JLabel("Benutzerdaten");
+		lblBenutzerdaten.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblBenutzerdaten.setBounds(167, 11, 189, 22);
+		frmEinchecken.getContentPane().add(lblBenutzerdaten);
 		
-		JLabel LabelZimmeroptionen = new JLabel("Zimmeroptionen");
-		LabelZimmeroptionen.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		LabelZimmeroptionen.setBounds(391, 11, 149, 22);
-		frmEinchecken.getContentPane().add(LabelZimmeroptionen);
+		JLabel lblZimmeroptionen = new JLabel("Zimmeroptionen");
+		lblZimmeroptionen.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblZimmeroptionen.setBounds(391, 11, 149, 22);
+		frmEinchecken.getContentPane().add(lblZimmeroptionen);
 		
-		JLabel LabelGuestnumber = new JLabel("Gastnr.");
-		LabelGuestnumber.setBounds(270, 262, 86, 14);
-		frmEinchecken.getContentPane().add(LabelGuestnumber);
+		JLabel lblGuestnumber = new JLabel("Gastnr.");
+		lblGuestnumber.setBounds(270, 262, 86, 14);
+		frmEinchecken.getContentPane().add(lblGuestnumber);
 		
-		textGuestnumber = new JTextField();
-		textGuestnumber.setColumns(10);
-		textGuestnumber.setBounds(270, 287, 86, 20);
-		frmEinchecken.getContentPane().add(textGuestnumber);
+		textFieldGuestnumber = new JTextField();
+		textFieldGuestnumber.setColumns(10);
+		textFieldGuestnumber.setBounds(270, 287, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldGuestnumber);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(533, 11, 351, 336);
 		// Tabelle anzeigen: Siehe Zeile hier drunter
-		scrollPane.setViewportView(checkinTable);
+		scrollPane.setViewportView(tableCeckin);
 		frmEinchecken.getContentPane().add(scrollPane);
 		
 		JButton btnCheckin = new JButton("Einchecken");
