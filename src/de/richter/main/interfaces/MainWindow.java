@@ -59,6 +59,7 @@ public class MainWindow {
 		JButton btnCheckin = new JButton("Einchecken");
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Einchecken");
 				CheckinWindow checkinWindow = new CheckinWindow();
 				checkinWindow.getFrmEinchecken().setVisible(true);
 			}
@@ -69,6 +70,7 @@ public class MainWindow {
 		JButton btnCheckout = new JButton("Auschecken");
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
+				System.out.println("Auschecken");
 				CheckoutWindow checkoutWindow = new CheckoutWindow();
 				checkoutWindow.getFrmAuschecken().setVisible(true);
 			}
@@ -79,6 +81,7 @@ public class MainWindow {
 		JButton btnRoomstatus = new JButton("Zimmerstatus");
 		btnRoomstatus.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
+				System.out.println("Zimmerstatus");
 				RoomstatusWindow roomstatusWindow = new RoomstatusWindow();
 				roomstatusWindow.getFrmRoomstatus().setVisible(true);
 			}
@@ -89,6 +92,7 @@ public class MainWindow {
 		JButton btnStatistics = new JButton("Statistiken");
 		btnStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
+				System.out.println("Statistiken");
 				StatisticsWindow statisticsWindow = new StatisticsWindow();
 				statisticsWindow.getFrmStatistics().setVisible(true);
 			}
