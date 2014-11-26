@@ -97,6 +97,7 @@ public class CheckoutWindow {
 		JButton btnClose = new JButton("Schlie\u00DFen");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Auschecken wird geschlossen");
 				frmAuschecken.setVisible(false);
 			}
 		});

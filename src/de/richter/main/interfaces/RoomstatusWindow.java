@@ -70,7 +70,7 @@ public class RoomstatusWindow {
 		btnClose = new JButton("Schlie\u00DFen");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Fenster wird geschlossen");
+				System.out.println("Zimmerstatus wird geschlossen");
 				frmRoomstatus.setVisible(false);
 			}
 		});
