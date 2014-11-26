@@ -5,9 +5,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import de.richter.main.interfaces.MainWindow;
+
 import java.awt.Font;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class CheckoutWindow {
 
@@ -89,6 +95,11 @@ public class CheckoutWindow {
 		frmAuschecken.getContentPane().add(btnCheckout);
 		
 		JButton btnClose = new JButton("Schlie\u00DFen");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmAuschecken.setVisible(false);
+			}
+		});
 		btnClose.setBounds(295, 114, 104, 36);
 		frmAuschecken.getContentPane().add(btnClose);
 	}

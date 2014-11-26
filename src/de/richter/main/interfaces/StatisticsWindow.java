@@ -8,6 +8,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StatisticsWindow {
 
@@ -77,6 +79,12 @@ public class StatisticsWindow {
 		frmStatistics.getContentPane().add(textFieldGuestaway);
 		
 		JButton btnClose = new JButton("Schlie\u00DFen");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Statistiken werden geschlossen");
+				frmStatistics.setVisible(false);
+			}
+		});
 		btnClose.setBounds(83, 131, 95, 29);
 		frmStatistics.getContentPane().add(btnClose);
 	}

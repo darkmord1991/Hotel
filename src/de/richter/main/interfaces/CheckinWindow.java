@@ -11,18 +11,28 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import de.richter.main.model.CheckinModel;
+
 import java.awt.Font;
+
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
 public class CheckinWindow {
 
 	private JFrame frmEinchecken;
-	private JTextField textFieldFrom;
-	private JTextField textFieldTo;
+	private JTextField textFieldStart;
+	private JTextField textFieldEnd;
 	private JTextField textFieldName;
 	private JTextField textFieldPrename;
 	private JTextField textFieldStreet;
@@ -31,7 +41,7 @@ public class CheckinWindow {
 	private JTextField textFieldCity;
 	private JTextField textFieldMail;
 	private JTextField textFieldPhone;
-	private JTable tableCeckin;
+	private JTable tableCheckin;
 	private JTextField textFieldGuestnumber;
 
 	/**
@@ -61,21 +71,22 @@ public class CheckinWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frmEinchecken = new JFrame();
 		frmEinchecken.setTitle("Einchecken");
-		frmEinchecken.setBounds(100, 100, 900, 400);
+		frmEinchecken.setBounds(100, 100, 1164, 400);
 		frmEinchecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEinchecken.getContentPane().setLayout(null);
 		
-		textFieldFrom = new JTextField();
-		textFieldFrom.setBounds(25, 64, 86, 20);
-		frmEinchecken.getContentPane().add(textFieldFrom);
-		textFieldFrom.setColumns(10);
+		textFieldStart = new JTextField();
+		textFieldStart.setBounds(25, 64, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldStart);
+		textFieldStart.setColumns(10);
 		
-		textFieldTo = new JTextField();
-		textFieldTo.setBounds(25, 120, 86, 20);
-		frmEinchecken.getContentPane().add(textFieldTo);
-		textFieldTo.setColumns(10);
+		textFieldEnd = new JTextField();
+		textFieldEnd.setBounds(25, 120, 86, 20);
+		frmEinchecken.getContentPane().add(textFieldEnd);
+		textFieldEnd.setColumns(10);
 		
 		JLabel lblFrom = new JLabel("von");
 		lblFrom.setBounds(25, 39, 86, 14);
@@ -181,22 +192,18 @@ public class CheckinWindow {
 		comboBoxRoom.setBounds(391, 205, 96, 20);
 		frmEinchecken.getContentPane().add(comboBoxRoom);
 		
-		tableCeckin = new JTable();
-		tableCeckin.setModel(new DefaultTableModel(
+		tableCheckin = new JTable();
+		
+		// Hier fixen!
+		tableCheckin.setModel(new CheckinModel(
 			new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-				{null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"Zimmernr.", "Besetzt", "Gastnr.", "Personenanz.", "Zimmerart"
+				"Gastnr.", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ", "Stadt", "E-Mail", "Telefon"
 			}
 		));
-		tableCeckin.getColumnModel().getColumn(3).setPreferredWidth(81);
-		tableCeckin.getColumnModel().getColumn(3).setMinWidth(19);
-		tableCeckin.getColumnModel().getColumn(4).setPreferredWidth(70);
-		tableCeckin.setBounds(545, 11, 329, 336);
+		tableCheckin.setBounds(545, 11, 329, 336);
 		
 		JLabel lblTime = new JLabel("Zeiterfassung");
 		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -223,16 +230,61 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(textFieldGuestnumber);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(533, 11, 351, 336);
+		scrollPane.setBounds(533, 11, 592, 336);
 		// Tabelle anzeigen: Siehe Zeile hier drunter
-		scrollPane.setViewportView(tableCeckin);
+		scrollPane.setViewportView(tableCheckin);
 		frmEinchecken.getContentPane().add(scrollPane);
 		
 		JButton btnCheckin = new JButton("Einchecken");
-		btnCheckin.setBounds(391, 316, 110, 31);
+		btnCheckin.setBounds(391, 282, 110, 31);
 		frmEinchecken.getContentPane().add(btnCheckin);
+		
+		JButton btnClose = new JButton("Schlie\u00DFen");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Einchecken wird geschlossen");
+				frmEinchecken.setVisible(false);
+			}
+		});
+		btnClose.setBounds(391, 330, 110, 31);
+		frmEinchecken.getContentPane().add(btnClose);
+		// Actions
+		btnCheckin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// Variablendeklaration
+				String start, end, name, prename, street, number, postcode, city, mail, phone, guestnumber;
+				System.out.println("Gastdaten werden erfasst");
+//				start = textFieldStart.getText();
+//				end = textFieldEnd.getText();
+				name = textFieldName.getText();
+				prename = textFieldPrename.getText();
+//				street = textFieldStreet.getText();
+//				number = textFieldNumber.getText();
+//				postcode = textFieldPostcode.getText();
+//				city = textFieldCity.getText();
+//				mail = textFieldMail.getText();
+//				phone = textFieldPhone.getText();
+//				guestnumber = textFieldGuestnumber.getText();
+//				tableCheckin.getModel().setValueAt(name, 0, 0);
+//				tableCheckin.getModel().setValueAt(prename, 0, 1);
+				
+				/** Tabelleninhalt wird exportiert **/
+				BufferedWriter bfw = new BufferedWriter(new FileWriter("Data.txt"));
+				for(int i = 0 ; i < tableCheckin.getColumnCount() ; i++) {
+				    bfw.write(tableCheckin.getColumnName(i));
+				    bfw.write("\t");
+				  }
+				  for (int i = 0 ; i < tableCheckin.getRowCount(); i++) {
+					  	bfw.newLine();
+				  for(int j = 0 ; j < tableCheckin.getColumnCount();j++) {
+				      	bfw.write((String)(tableCheckin.getValueAt(i,j)));
+				      	bfw.write("\t");;
+				    }
+				  }
+				  bfw.close();
+					}
+				});
 	}
-
 	public JFrame getFrmEinchecken() {
 		return frmEinchecken;
 	}
@@ -240,5 +292,4 @@ public class CheckinWindow {
 	public void setFrmEinchecken(JFrame frmEinchecken) {
 		this.frmEinchecken = frmEinchecken;
 	}
-	
 }

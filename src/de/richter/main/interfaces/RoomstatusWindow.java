@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import java.awt.BorderLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class RoomstatusWindow {
 
@@ -66,6 +68,12 @@ public class RoomstatusWindow {
 		scrollPane.setViewportView(tableRoom);
 		
 		btnClose = new JButton("Schlie\u00DFen");
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Fenster wird geschlossen");
+				frmRoomstatus.setVisible(false);
+			}
+		});
 		btnClose.setBounds(149, 230, 134, 23);
 		frmRoomstatus.getContentPane().add(btnClose);
 	}
