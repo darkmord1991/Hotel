@@ -1,23 +1,11 @@
 package de.richter.main.interfaces;
 
 import java.awt.EventQueue;
-
-import de.richter.main.interfaces.CheckinWindow;
-
-import javax.swing.JFrame;
-import javax.swing.JButton;
-
-import java.awt.BorderLayout;
-
-import javax.swing.SwingConstants;
-
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
-
-import com.jgoodies.forms.factories.DefaultComponentFactory;
-import com.sun.media.jfxmedia.events.NewFrameEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
 public class MainWindow {
 
