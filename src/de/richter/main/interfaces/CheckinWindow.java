@@ -192,7 +192,7 @@ public class CheckinWindow {
 		comboBoxRoom.setBounds(391, 205, 96, 20);
 		frmEinchecken.getContentPane().add(comboBoxRoom);
 		
-		tableCheckin = new JTable();
+	/**	tableCheckin = new JTable();
 		
 		// Hier fixen!
 		tableCheckin.setModel(new CheckinModel(
@@ -204,7 +204,7 @@ public class CheckinWindow {
 			}
 		));
 		tableCheckin.setBounds(545, 11, 329, 336);
-		
+		**/
 		JLabel lblTime = new JLabel("Zeiterfassung");
 		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTime.setBounds(25, 11, 110, 22);
@@ -268,7 +268,7 @@ public class CheckinWindow {
 //				tableCheckin.getModel().setValueAt(name, 0, 0);
 //				tableCheckin.getModel().setValueAt(prename, 0, 1);
 				
-				/** Tabelleninhalt wird exportiert **/
+				/** Tabelleninhalt wird exportiert
 				BufferedWriter bfw = new BufferedWriter(new FileWriter("Data.txt"));
 				for(int i = 0 ; i < tableCheckin.getColumnCount() ; i++) {
 				    bfw.write(tableCheckin.getColumnName(i));
@@ -281,9 +281,11 @@ public class CheckinWindow {
 				      	bfw.write("\t");;
 				    }
 				  }
-				  bfw.close();
+				  bfw.close();		
+				  **/
 					}
 				});
+
 	}
 	public JFrame getFrmEinchecken() {
 		return frmEinchecken;
