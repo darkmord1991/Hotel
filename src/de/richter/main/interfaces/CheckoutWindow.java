@@ -30,6 +30,7 @@ public class CheckoutWindow {
 				try {
 					CheckoutWindow window = new CheckoutWindow();
 					window.frmAuschecken.setVisible(true);
+					window.frmAuschecken.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

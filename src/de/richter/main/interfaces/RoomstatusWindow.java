@@ -7,6 +7,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+
+import de.richter.main.model.CheckinModel;
+import de.richter.main.model.RoomstatusModel;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,6 +30,7 @@ public class RoomstatusWindow {
 				try {
 					RoomstatusWindow window = new RoomstatusWindow();
 					window.frmRoomstatus.setVisible(true);
+					window.frmRoomstatus.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,7 +60,7 @@ public class RoomstatusWindow {
 		frmRoomstatus.getContentPane().add(scrollPane);
 		
 		tableRoom = new JTable();
-		tableRoom.setModel(new DefaultTableModel(
+		tableRoom.setModel(new RoomstatusModel(
 			new Object[][] {
 				{null, null, null, null, null},
 				{null, null, null, null, null},
@@ -77,7 +82,15 @@ public class RoomstatusWindow {
 		btnClose.setBounds(149, 230, 134, 23);
 		frmRoomstatus.getContentPane().add(btnClose);
 	}
-
+	
+	/**
+	 * Methode getRoomstatusModel 
+	 * @return = das Model für setLastValueAt
+	 */
+	private RoomstatusModel getRoomstatusModel() {
+		return ((RoomstatusModel)tableRoom.getModel());
+		// Syntax für Einträge in CheckinWindow anschauen
+	}
 	public JFrame getFrmRoomstatus() {
 		return frmRoomstatus;
 	}

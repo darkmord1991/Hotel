@@ -53,6 +53,7 @@ public class CheckinWindow {
 				try {
 					CheckinWindow window = new CheckinWindow();
 					window.frmEinchecken.setVisible(true);
+					window.frmEinchecken.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -74,7 +75,7 @@ public class CheckinWindow {
 		
 		frmEinchecken = new JFrame();
 		frmEinchecken.setTitle("Einchecken");
-		frmEinchecken.setBounds(100, 100, 1164, 400);
+		frmEinchecken.setBounds(100, 100, 1351, 400);
 		frmEinchecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmEinchecken.getContentPane().setLayout(null);
 		
@@ -192,19 +193,26 @@ public class CheckinWindow {
 		comboBoxRoom.setBounds(391, 205, 96, 20);
 		frmEinchecken.getContentPane().add(comboBoxRoom);
 		
-	/**	tableCheckin = new JTable();
-		
-		// Hier fixen!
+		tableCheckin = new JTable();
+		// Vorsicht! Ändert immer wieder auf DefaultTableModel, muss auf CheckinModel geändert werden
 		tableCheckin.setModel(new CheckinModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"Gastnr.", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ", "Stadt", "E-Mail", "Telefon"
+				"Gastnr.", "von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ", "Stadt", "E-Mail", "Telefon"
 			}
 		));
+		// Tabellenspaltenbreite wird gesetzt
+		tableCheckin.getColumnModel().getColumn(0).setPreferredWidth(47);
+		tableCheckin.getColumnModel().getColumn(1).setPreferredWidth(53);
+		tableCheckin.getColumnModel().getColumn(2).setPreferredWidth(57);
+		tableCheckin.getColumnModel().getColumn(4).setPreferredWidth(65);
+		tableCheckin.getColumnModel().getColumn(6).setPreferredWidth(50);
+		tableCheckin.getColumnModel().getColumn(7).setPreferredWidth(59);
+		tableCheckin.getColumnModel().getColumn(8).setPreferredWidth(90);
+		tableCheckin.getColumnModel().getColumn(9).setPreferredWidth(110);
 		tableCheckin.setBounds(545, 11, 329, 336);
-		**/
 		JLabel lblTime = new JLabel("Zeiterfassung");
 		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblTime.setBounds(25, 11, 110, 22);
@@ -230,7 +238,7 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(textFieldGuestnumber);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(533, 11, 592, 336);
+		scrollPane.setBounds(533, 11, 792, 336);
 		// Tabelle anzeigen: Siehe Zeile hier drunter
 		scrollPane.setViewportView(tableCheckin);
 		frmEinchecken.getContentPane().add(scrollPane);
@@ -246,7 +254,7 @@ public class CheckinWindow {
 				frmEinchecken.setVisible(false);
 			}
 		});
-		btnClose.setBounds(391, 330, 110, 31);
+		btnClose.setBounds(391, 324, 110, 31);
 		frmEinchecken.getContentPane().add(btnClose);
 		// Actions
 		btnCheckin.addActionListener(new ActionListener() {
@@ -254,19 +262,32 @@ public class CheckinWindow {
 				// Variablendeklaration
 				String start, end, name, prename, street, number, postcode, city, mail, phone, guestnumber;
 				System.out.println("Gastdaten werden erfasst");
-//				start = textFieldStart.getText();
-//				end = textFieldEnd.getText();
+				// Variablen holen Inhalt der Textfelder
+				start = textFieldStart.getText();
+				end = textFieldEnd.getText();
+				guestnumber = textFieldGuestnumber.getText();
 				name = textFieldName.getText();
 				prename = textFieldPrename.getText();
-//				street = textFieldStreet.getText();
-//				number = textFieldNumber.getText();
-//				postcode = textFieldPostcode.getText();
-//				city = textFieldCity.getText();
-//				mail = textFieldMail.getText();
-//				phone = textFieldPhone.getText();
-//				guestnumber = textFieldGuestnumber.getText();
-//				tableCheckin.getModel().setValueAt(name, 0, 0);
-//				tableCheckin.getModel().setValueAt(prename, 0, 1);
+				street = textFieldStreet.getText();
+				number = textFieldNumber.getText();
+				postcode = textFieldPostcode.getText();
+				city = textFieldCity.getText();
+				mail = textFieldMail.getText();
+				phone = textFieldPhone.getText();
+				// Textfeldinhalt wird dem Tablemodel übergeben
+				// Variablen zum Zählen müssen eingefügt werden für 0,0 - 0,10 usw.
+				getCheckinModel().setValueAt(guestnumber, 0, 0);
+				getCheckinModel().setValueAt(start, 0, 1);
+				getCheckinModel().setValueAt(end, 0, 2);
+				getCheckinModel().setValueAt(name, 0, 3);
+				getCheckinModel().setValueAt(prename, 0, 4);
+				getCheckinModel().setValueAt(street, 0, 5);
+				getCheckinModel().setValueAt(number, 0, 6);
+				getCheckinModel().setValueAt(postcode, 0, 7);
+				getCheckinModel().setValueAt(city, 0, 8);
+				getCheckinModel().setValueAt(mail, 0, 9);
+				getCheckinModel().setLastValueAt(phone, 0, 10);
+				
 				
 				/** Tabelleninhalt wird exportiert
 				BufferedWriter bfw = new BufferedWriter(new FileWriter("Data.txt"));
@@ -286,6 +307,14 @@ public class CheckinWindow {
 					}
 				});
 
+	}
+	
+	/**
+	 * Methode getCheckinModel 
+	 * @return = das Model für setLastValueAt
+	 */
+	private CheckinModel getCheckinModel() {
+		return ((CheckinModel)tableCheckin.getModel());
 	}
 	public JFrame getFrmEinchecken() {
 		return frmEinchecken;

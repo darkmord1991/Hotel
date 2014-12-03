@@ -20,6 +20,7 @@ public class MainWindow {
 				try {
 					MainWindow window = new MainWindow();
 					window.frmHotelprogramm.setVisible(true);
+					window.frmHotelprogramm.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,6 +50,7 @@ public class MainWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Einchecken");
 				CheckinWindow checkinWindow = new CheckinWindow();
+				checkinWindow.getFrmEinchecken().setLocationRelativeTo(null);
 				checkinWindow.getFrmEinchecken().setVisible(true);
 			}
 		});
@@ -60,6 +62,7 @@ public class MainWindow {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Auschecken");
 				CheckoutWindow checkoutWindow = new CheckoutWindow();
+				checkoutWindow.getFrmAuschecken().setLocationRelativeTo(null);
 				checkoutWindow.getFrmAuschecken().setVisible(true);
 			}
 		});
@@ -71,6 +74,7 @@ public class MainWindow {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Zimmerstatus");
 				RoomstatusWindow roomstatusWindow = new RoomstatusWindow();
+				roomstatusWindow.getFrmRoomstatus().setLocationRelativeTo(null);
 				roomstatusWindow.getFrmRoomstatus().setVisible(true);
 			}
 		});
@@ -82,6 +86,7 @@ public class MainWindow {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Statistiken");
 				StatisticsWindow statisticsWindow = new StatisticsWindow();
+				statisticsWindow.getFrmStatistics().setLocationRelativeTo(null);
 				statisticsWindow.getFrmStatistics().setVisible(true);
 			}
 		});

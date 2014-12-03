@@ -27,6 +27,7 @@ public class StatisticsWindow {
 				try {
 					StatisticsWindow window = new StatisticsWindow();
 					window.frmStatistics.setVisible(true);
+					window.frmStatistics.setLocationRelativeTo(null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
