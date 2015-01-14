@@ -45,6 +45,7 @@ public class MainWindow {
 		frmHotelprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmHotelprogramm.getContentPane().setLayout(null);
 		
+		//Einchecken
 		JButton btnCheckin = new JButton("Einchecken");
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -57,6 +58,7 @@ public class MainWindow {
 		btnCheckin.setBounds(25, 23, 188, 63);
 		frmHotelprogramm.getContentPane().add(btnCheckin);
 		
+		//Auschecken
 		JButton btnCheckout = new JButton("Auschecken");
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
@@ -69,6 +71,7 @@ public class MainWindow {
 		btnCheckout.setBounds(25, 97, 188, 63);
 		frmHotelprogramm.getContentPane().add(btnCheckout);
 		
+		//Zimmerstatus
 		JButton btnRoomstatus = new JButton("Zimmerstatus");
 		btnRoomstatus.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
@@ -81,6 +84,7 @@ public class MainWindow {
 		btnRoomstatus.setBounds(25, 172, 188, 63);
 		frmHotelprogramm.getContentPane().add(btnRoomstatus);
 		
+		//Statistiken
 		JButton btnStatistics = new JButton("Statistiken");
 		btnStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
