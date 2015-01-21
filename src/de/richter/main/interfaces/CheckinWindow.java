@@ -2,6 +2,8 @@ package de.richter.main.interfaces;
 
 import java.awt.EventQueue;
 
+import javafx.scene.control.TableCell;
+
 import javax.swing.JFrame;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -24,12 +26,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
 public class CheckinWindow {
-
+	// Globale Variablen
+	private int zeile;
+	
 	private JFrame frmEinchecken;
 	private JTextField textFieldStart;
 	private JTextField textFieldEnd;
@@ -72,7 +77,6 @@ public class CheckinWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
 		frmEinchecken = new JFrame();
 		frmEinchecken.setTitle("Einchecken");
 		frmEinchecken.setBounds(100, 100, 1351, 400);
@@ -261,6 +265,7 @@ public class CheckinWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				// Variablendeklaration
 				String start, end, name, prename, street, number, postcode, city, mail, phone, guestnumber;
+				int stelle = 0;
 				System.out.println("Gastdaten werden erfasst");
 				// Variablen holen Inhalt der Textfelder
 				start = textFieldStart.getText();
@@ -276,36 +281,55 @@ public class CheckinWindow {
 				phone = textFieldPhone.getText();
 				// Textfeldinhalt wird dem Tablemodel übergeben
 				// Variablen zum Zählen müssen eingefügt werden für 0,0 - 0,10 usw.
-				getCheckinModel().setValueAt(guestnumber, 0, 0);
-				getCheckinModel().setValueAt(start, 0, 1);
-				getCheckinModel().setValueAt(end, 0, 2);
-				getCheckinModel().setValueAt(name, 0, 3);
-				getCheckinModel().setValueAt(prename, 0, 4);
-				getCheckinModel().setValueAt(street, 0, 5);
-				getCheckinModel().setValueAt(number, 0, 6);
-				getCheckinModel().setValueAt(postcode, 0, 7);
-				getCheckinModel().setValueAt(city, 0, 8);
-				getCheckinModel().setValueAt(mail, 0, 9);
-				getCheckinModel().setLastValueAt(phone, 0, 10);
+				getCheckinModel().setValueAt(guestnumber, zeile, stelle++);
+				getCheckinModel().setValueAt(start, zeile, stelle++);
+				getCheckinModel().setValueAt(end, zeile, stelle++);
+				getCheckinModel().setValueAt(name, zeile, stelle++);
+				getCheckinModel().setValueAt(prename, zeile, stelle++);
+				getCheckinModel().setValueAt(street, zeile, stelle++);
+				getCheckinModel().setValueAt(number, zeile, stelle++);
+				getCheckinModel().setValueAt(postcode, zeile, stelle++);
+				getCheckinModel().setValueAt(city, zeile, stelle++);
+				getCheckinModel().setValueAt(mail, zeile, stelle++);
+				getCheckinModel().setLastValueAt(phone, zeile, stelle++);
+				zeile++;
+				textFieldStart.setText("");
+				textFieldEnd.setText("");
+				textFieldGuestnumber.setText("");
+				textFieldName.setText("");
+				textFieldPrename.setText("");
+				textFieldStreet.setText("");
+				textFieldNumber.setText("");
+				textFieldPostcode.setText("");
+				textFieldCity.setText("");
+				textFieldMail.setText("");
+				textFieldPhone.setText("");
 				
-				
-				/** Tabelleninhalt wird exportiert
-				BufferedWriter bfw = new BufferedWriter(new FileWriter("Data.txt"));
-				for(int i = 0 ; i < tableCheckin.getColumnCount() ; i++) {
-				    bfw.write(tableCheckin.getColumnName(i));
-				    bfw.write("\t");
-				  }
-				  for (int i = 0 ; i < tableCheckin.getRowCount(); i++) {
-					  	bfw.newLine();
-				  for(int j = 0 ; j < tableCheckin.getColumnCount();j++) {
-				      	bfw.write((String)(tableCheckin.getValueAt(i,j)));
-				      	bfw.write("\t");;
-				    }
-				  }
-				  bfw.close();		
-				  **/
-					}
-				});
+				// Tabelleninhalt wird exportiert
+				BufferedWriter bfw;
+				try {
+					bfw = new BufferedWriter(new FileWriter("tableData.txt"));
+//					for (int i = 0; i < tableCheckin.getColumnCount(); i++) {
+//						bfw.write(tableCheckin.getColumnName(i));
+//						bfw.write("\t");
+//					}
+					for (int i = 0; i < tableCheckin.getRowCount()-1; i++) {
+						for (int j = 0; j < tableCheckin.getColumnCount(); j++) {
+							System.out.println(j); 
+//							System.out.println(tableCheckin.getValueAt(i, j));
+							bfw.write((String) (tableCheckin.getValueAt(i, j)));
+							bfw.write(";");
+							;
+					    }
+						bfw.newLine();
+					  }
+					  bfw.close();		
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}	
+		});
 
 	}
 	
@@ -315,6 +339,10 @@ public class CheckinWindow {
 	 */
 	private CheckinModel getCheckinModel() {
 		return ((CheckinModel)tableCheckin.getModel());
+	}
+	public void spalteninit() {
+		// Hier soll er Spalte aus gespeichertem Dokument nehmen, wenn nicht vorhanden initialisieren
+		zeile = 0;
 	}
 	public JFrame getFrmEinchecken() {
 		return frmEinchecken;
