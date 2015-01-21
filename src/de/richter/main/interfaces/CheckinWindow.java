@@ -24,7 +24,9 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -33,7 +35,7 @@ import javax.swing.JButton;
 
 public class CheckinWindow {
 	// Globale Variablen
-	private int zeile;
+	private int zeile = 0;
 	
 	private JFrame frmEinchecken;
 	private JTextField textFieldStart;
@@ -71,6 +73,30 @@ public class CheckinWindow {
 	 */
 	public CheckinWindow() {
 		initialize();
+		// Tabelleninhalt (vorhanden) einfügen
+		zeile = 0;
+		BufferedReader br = null;
+		String line;
+		try {
+			br = new BufferedReader(new FileReader("tableData.txt"));
+			while ((line = br.readLine()) != null) {
+				System.out.println(line);
+			// String aufsplitten
+			String[] arr = line.split(";");
+				for (int i = 0; i < arr.length; i++) {
+					if (i < (arr.length-1)) {
+						getCheckinModel().setValueAt(arr[i], zeile, i);
+
+						}
+					else {					
+						getCheckinModel().setLastValueAt(arr[i], zeile, i);
+					}
+				}
+				zeile++;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -266,6 +292,7 @@ public class CheckinWindow {
 				// Variablendeklaration
 				String start, end, name, prename, street, number, postcode, city, mail, phone, guestnumber;
 				int stelle = 0;
+				zeile = 0;
 				System.out.println("Gastdaten werden erfasst");
 				// Variablen holen Inhalt der Textfelder
 				start = textFieldStart.getText();
@@ -319,8 +346,9 @@ public class CheckinWindow {
 							System.out.println(j); 
 //							System.out.println(tableCheckin.getValueAt(i, j));
 							bfw.write((String) (tableCheckin.getValueAt(i, j)));
+							if (j < (tableCheckin.getColumnCount()-1)) {
 							bfw.write(";");
-							;
+							}
 					    }
 						bfw.newLine();
 					  }
