@@ -309,6 +309,7 @@ public class CheckinWindow {
 				BufferedWriter bfw;
 				try {
 					bfw = new BufferedWriter(new FileWriter("tableData.txt"));
+					// Spaltennamen auch in Datei schreiben (Falls nötig)
 //					for (int i = 0; i < tableCheckin.getColumnCount(); i++) {
 //						bfw.write(tableCheckin.getColumnName(i));
 //						bfw.write("\t");
