@@ -32,10 +32,11 @@ import java.io.IOException;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
 
 public class CheckinWindow {
 	// Globale Variablen
-	private int zeile = 0;
+	private int zeile;
 	
 	private JFrame frmEinchecken;
 	private JTextField textFieldStart;
@@ -50,6 +51,7 @@ public class CheckinWindow {
 	private JTextField textFieldPhone;
 	private JTable tableCheckin;
 	private JTextField textFieldGuestnumber;
+	private JTextField textFieldRoomnumber;
 
 	/**
 	 * Launch the application.
@@ -200,6 +202,7 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(textFieldPhone);
 		
 		JComboBox comboBoxPersons = new JComboBox();
+		comboBoxPersons.setModel(new DefaultComboBoxModel(new String[] {"Zimmer", "Room", "Rom"}));
 		comboBoxPersons.setBounds(391, 64, 96, 20);
 		frmEinchecken.getContentPane().add(comboBoxPersons);
 		
@@ -212,6 +215,7 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(lblZimmerkategorie);
 		
 		JComboBox comboBoxPension = new JComboBox();
+		comboBoxPension.setModel(new DefaultComboBoxModel(new String[] {"Zimmer", "Room", "Rom"}));
 		comboBoxPension.setBounds(391, 139, 96, 20);
 		frmEinchecken.getContentPane().add(comboBoxPension);
 		
@@ -220,6 +224,7 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(lblRoom);
 		
 		JComboBox comboBoxRoom = new JComboBox();
+		comboBoxRoom.setModel(new DefaultComboBoxModel(new String[] {"Zimmer", "Room", "Rom"}));
 		comboBoxRoom.setBounds(391, 205, 96, 20);
 		frmEinchecken.getContentPane().add(comboBoxRoom);
 		
@@ -227,21 +232,20 @@ public class CheckinWindow {
 		// Vorsicht! Ändert immer wieder auf DefaultTableModel, muss auf CheckinModel geändert werden
 		tableCheckin.setModel(new CheckinModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null},
+				{null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"Gastnr.", "von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ", "Stadt", "E-Mail", "Telefon"
+				"Gastnr.", "Zimmernr.", "von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ", "Stadt", "E-Mail", "Telefon", "Personen", "Pensionsart", "Zimmerkategorie"
 			}
 		));
-		// Tabellenspaltenbreite wird gesetzt
 		tableCheckin.getColumnModel().getColumn(0).setPreferredWidth(47);
-		tableCheckin.getColumnModel().getColumn(1).setPreferredWidth(53);
-		tableCheckin.getColumnModel().getColumn(2).setPreferredWidth(57);
-		tableCheckin.getColumnModel().getColumn(4).setPreferredWidth(65);
-		tableCheckin.getColumnModel().getColumn(6).setPreferredWidth(50);
-		tableCheckin.getColumnModel().getColumn(7).setPreferredWidth(59);
-		tableCheckin.getColumnModel().getColumn(8).setPreferredWidth(90);
-		tableCheckin.getColumnModel().getColumn(9).setPreferredWidth(110);
+		tableCheckin.getColumnModel().getColumn(2).setPreferredWidth(53);
+		tableCheckin.getColumnModel().getColumn(3).setPreferredWidth(57);
+		tableCheckin.getColumnModel().getColumn(5).setPreferredWidth(65);
+		tableCheckin.getColumnModel().getColumn(7).setPreferredWidth(50);
+		tableCheckin.getColumnModel().getColumn(8).setPreferredWidth(59);
+		tableCheckin.getColumnModel().getColumn(9).setPreferredWidth(90);
+		tableCheckin.getColumnModel().getColumn(10).setPreferredWidth(110);
 		tableCheckin.setBounds(545, 11, 329, 336);
 		JLabel lblTime = new JLabel("Zeiterfassung");
 		lblTime.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -274,7 +278,7 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(scrollPane);
 		
 		JButton btnCheckin = new JButton("Einchecken");
-		btnCheckin.setBounds(391, 282, 110, 31);
+		btnCheckin.setBounds(391, 287, 110, 31);
 		frmEinchecken.getContentPane().add(btnCheckin);
 		
 		JButton btnClose = new JButton("Schlie\u00DFen");
@@ -286,18 +290,27 @@ public class CheckinWindow {
 		});
 		btnClose.setBounds(391, 324, 110, 31);
 		frmEinchecken.getContentPane().add(btnClose);
+		
+		JLabel lblRoomnumber = new JLabel("Zimmernummer");
+		lblRoomnumber.setBounds(391, 236, 86, 14);
+		frmEinchecken.getContentPane().add(lblRoomnumber);
+		
+		textFieldRoomnumber = new JTextField();
+		textFieldRoomnumber.setColumns(10);
+		textFieldRoomnumber.setBounds(391, 259, 96, 20);
+		frmEinchecken.getContentPane().add(textFieldRoomnumber);
 		// Actions
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Variablendeklaration
-				String start, end, name, prename, street, number, postcode, city, mail, phone, guestnumber;
+				String start, end, name, prename, street, number, postcode, city, mail, phone, guestnumber, roomnumber, persons, pension, room;
 				int stelle = 0;
-				zeile = 0;
 				System.out.println("Gastdaten werden erfasst");
 				// Variablen holen Inhalt der Textfelder
 				start = textFieldStart.getText();
 				end = textFieldEnd.getText();
 				guestnumber = textFieldGuestnumber.getText();
+				roomnumber = textFieldRoomnumber.getText();
 				name = textFieldName.getText();
 				prename = textFieldPrename.getText();
 				street = textFieldStreet.getText();
@@ -306,9 +319,13 @@ public class CheckinWindow {
 				city = textFieldCity.getText();
 				mail = textFieldMail.getText();
 				phone = textFieldPhone.getText();
+				persons = String.valueOf(comboBoxPersons.getSelectedItem());
+				pension = String.valueOf(comboBoxPension.getSelectedItem());
+				room = String.valueOf(comboBoxRoom.getSelectedItem());
 				// Textfeldinhalt wird dem Tablemodel übergeben
 				// Variablen zum Zählen müssen eingefügt werden für 0,0 - 0,10 usw.
 				getCheckinModel().setValueAt(guestnumber, zeile, stelle++);
+				getCheckinModel().setValueAt(roomnumber, zeile, stelle++);
 				getCheckinModel().setValueAt(start, zeile, stelle++);
 				getCheckinModel().setValueAt(end, zeile, stelle++);
 				getCheckinModel().setValueAt(name, zeile, stelle++);
@@ -318,11 +335,15 @@ public class CheckinWindow {
 				getCheckinModel().setValueAt(postcode, zeile, stelle++);
 				getCheckinModel().setValueAt(city, zeile, stelle++);
 				getCheckinModel().setValueAt(mail, zeile, stelle++);
-				getCheckinModel().setLastValueAt(phone, zeile, stelle++);
+				getCheckinModel().setValueAt(phone, zeile, stelle++);
+				getCheckinModel().setValueAt(persons, zeile, stelle++);
+				getCheckinModel().setValueAt(pension, zeile, stelle++);
+				getCheckinModel().setLastValueAt(room, zeile, stelle++);
 				zeile++;
 				textFieldStart.setText("");
 				textFieldEnd.setText("");
 				textFieldGuestnumber.setText("");
+				textFieldRoomnumber.setText("");
 				textFieldName.setText("");
 				textFieldPrename.setText("");
 				textFieldStreet.setText("");
@@ -352,7 +373,8 @@ public class CheckinWindow {
 					    }
 						bfw.newLine();
 					  }
-					  bfw.close();		
+					  bfw.close();	
+					  System.out.println("Daten gespeichert!");
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

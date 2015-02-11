@@ -4,6 +4,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class CheckinModel extends DefaultTableModel {
 	private int guestnumber;
+	private int roomnumber;
 	private String start;
 	private String end;
 	private String name;
@@ -47,6 +48,14 @@ public class CheckinModel extends DefaultTableModel {
 
 	public void setGuestnumber(int guestnumber) {
 		this.guestnumber = guestnumber;
+	}
+	
+	public int getRoomnumber() {
+		return roomnumber;
+	}
+	
+	public void setRoomnumber(int roomnumber) {
+		this.roomnumber = roomnumber;
 	}
 	
 	public String getStart() {

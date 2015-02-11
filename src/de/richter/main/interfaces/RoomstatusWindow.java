@@ -3,6 +3,9 @@ package de.richter.main.interfaces;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -10,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class RoomstatusWindow {
+	private int zeile, spalte;
 
 	private JFrame frmRoomstatus;
 	private JTable tableRoom;
@@ -37,6 +41,27 @@ public class RoomstatusWindow {
 	 */
 	public RoomstatusWindow() {
 		initialize();
+		// Inhalt aus Datendatei in Tabelle lesen
+		zeile = 0;
+		BufferedReader br = null;
+		String line;
+		try {
+			br = new BufferedReader(new FileReader("tableData.txt"));
+			while ((line = br.readLine()) != null) {
+				System.out.println(line);
+			// String aufsplitten
+			String[] arr = line.split(";");
+			spalte = 0;
+			getRoomstatusModel().setValueAt(arr[1], zeile, spalte++);
+			getRoomstatusModel().setValueAt(arr[13], zeile, spalte++);
+			getRoomstatusModel().setValueAt(arr[12], zeile, spalte++);
+			getRoomstatusModel().setValueAt(arr[0], zeile, spalte++);
+			getRoomstatusModel().setValueAt(arr[3], zeile, spalte++);
+			zeile++;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
