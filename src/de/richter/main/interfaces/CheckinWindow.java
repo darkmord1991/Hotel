@@ -376,7 +376,7 @@ public class CheckinWindow {
 					  bfw.close();	
 					  System.out.println("Daten gespeichert!");
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					// TODO Auto-generated ceatch block
 					e.printStackTrace();
 				}
 			}	
