@@ -8,15 +8,20 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class StatisticsWindow {
+	private String came;
+	private String there;
+	private String away;
 
 	private JFrame frmStatistics;
-	private JTextField textFieldGuestday;
-	private JTextField textFieldGuestcame;
-	private JTextField textFieldGuestaway;
 
 	/**
 	 * Launch the application.
@@ -35,9 +40,6 @@ public class StatisticsWindow {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public StatisticsWindow() {
 		initialize();
 	}
@@ -46,6 +48,23 @@ public class StatisticsWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		// Statistiken laden
+				BufferedReader stats_br = null;
+				String stats;
+					try {
+						stats_br = new BufferedReader(new FileReader("statistics.txt"));
+						while ((stats = stats_br.readLine()) != null) {
+							System.out.println(stats);
+							String[] arr = stats.split(";");
+							came = arr[0];
+							there = arr[1];
+							away = arr[2];
+						}
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 		frmStatistics = new JFrame();
 		frmStatistics.setBounds(100, 100, 280, 210);
 		frmStatistics.setTitle("Statistiken");
@@ -64,21 +83,6 @@ public class StatisticsWindow {
 		lblGuestaway.setBounds(30, 90, 189, 14);
 		frmStatistics.getContentPane().add(lblGuestaway);
 		
-		textFieldGuestday = new JTextField();
-		textFieldGuestday.setBounds(133, 31, 86, 20);
-		frmStatistics.getContentPane().add(textFieldGuestday);
-		textFieldGuestday.setColumns(10);
-		
-		textFieldGuestcame = new JTextField();
-		textFieldGuestcame.setColumns(10);
-		textFieldGuestcame.setBounds(133, 59, 86, 20);
-		frmStatistics.getContentPane().add(textFieldGuestcame);
-		
-		textFieldGuestaway = new JTextField();
-		textFieldGuestaway.setColumns(10);
-		textFieldGuestaway.setBounds(133, 87, 86, 20);
-		frmStatistics.getContentPane().add(textFieldGuestaway);
-		
 		JButton btnClose = new JButton("Schlie\u00DFen");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -88,6 +92,21 @@ public class StatisticsWindow {
 		});
 		btnClose.setBounds(83, 131, 95, 29);
 		frmStatistics.getContentPane().add(btnClose);
+		
+		JLabel lblGuestNow = new JLabel("");
+		lblGuestNow.setBounds(142, 31, 46, 14);
+		lblGuestNow.setText(came);
+		frmStatistics.getContentPane().add(lblGuestNow);
+		
+		JLabel lblGuestThere = new JLabel("");
+		lblGuestThere.setBounds(142, 62, 46, 14);
+		lblGuestThere.setText(there);
+		frmStatistics.getContentPane().add(lblGuestThere);
+		
+		JLabel lblGuestGone = new JLabel("");
+		lblGuestGone.setBounds(142, 90, 46, 14);
+		lblGuestGone.setText(away);
+		frmStatistics.getContentPane().add(lblGuestGone);
 	}
 
 	public JFrame getFrmStatistics() {
@@ -97,5 +116,4 @@ public class StatisticsWindow {
 	public void setFrmStatistics(JFrame frmStatistics) {
 		this.frmStatistics = frmStatistics;
 	}
-	
 }

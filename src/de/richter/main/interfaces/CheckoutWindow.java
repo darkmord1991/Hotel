@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,6 +28,13 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
 public class CheckoutWindow {
+	
+	private String came;
+	private int cameNr;
+	private String there;
+	private int thereNr;
+	private String away;
+	private int awayNr;
 
 	private JFrame frmAuschecken;
 	private JTextField textFieldName;
@@ -58,21 +66,14 @@ public class CheckoutWindow {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public CheckoutWindow() {
+	public CheckoutWindow() throws IOException {
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize() {
-		frmAuschecken = new JFrame();
-		frmAuschecken.setTitle("Auschecken");
-		frmAuschecken.setBounds(100, 100, 450, 200);
-		frmAuschecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmAuschecken.getContentPane().setLayout(null);
-		
+		// Löschdaten einlesen
 		zeile = 0;
 		BufferedReader br = null;
 		String line;
@@ -85,7 +86,8 @@ public class CheckoutWindow {
 				String[] arr = line.split(";");
 				// Tabelleninhalt wird in Liste gespeichert
 				table.add(line);
-				// Als nächste die Index der Gastnummer bekommen, aus der Table-liste löschen und Datei neu abspeichern!
+				// Als nächste die Index der Gastnummer bekommen, aus der
+				// Table-liste löschen und Datei neu abspeichern!
 				boxitems.add(arr[0]);
 				lastname.add(arr[4]);
 				prename.add(arr[5]);
@@ -94,8 +96,33 @@ public class CheckoutWindow {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		// Statistiken laden
+		BufferedReader stats_br = null;
+		String stats;
+		try {
+			stats_br = new BufferedReader(new FileReader("statistics.txt"));
+			while ((stats = stats_br.readLine()) != null) {
+				System.out.println(stats);
+				String[] arr = stats.split(";");
+				came = arr[0];
+				there = arr[1];
+				away = arr[2];
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		frmAuschecken = new JFrame();
+		frmAuschecken.setTitle("Auschecken");
+		frmAuschecken.setBounds(100, 100, 450, 200);
+		frmAuschecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAuschecken.getContentPane().setLayout(null);
+
 		JComboBox comboBoxGuestnumber = new JComboBox();
+		comboBoxGuestnumber.setModel(new DefaultComboBoxModel(new String[] {"Bitte ausw\u00E4hlen"}));
 //		for (int i=0; i < boxitems.size(); i++) {
 		for (String item : boxitems) {
 			comboBoxGuestnumber.addItem(item);
@@ -142,23 +169,41 @@ public class CheckoutWindow {
 		// Hier weitermachen (Datei überschreiben etc.)
 		btnCheckout.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				int deleteindex = comboBoxGuestnumber.getSelectedIndex();
+			public void actionPerformed(ActionEvent event) {
+				int deleteindex = comboBoxGuestnumber.getSelectedIndex()-1;
 				table.remove(deleteindex);
 				BufferedWriter bfw;
 				try {
 					bfw = new BufferedWriter(new FileWriter("tableData.txt"));
 					for (int i = 0; i < table.size(); i++) {
-						bfw.write(table[i]);
+						bfw.write(table.get(i));
 						bfw.newLine();
 					}
 					  bfw.close();	
 			
 				System.out.println("Gastdaten wurden gelöscht!");
 				} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
+				}
+				
+				// Hier noch herausfinden, wieso er keine Datei abspeichert. Evtl. neuen Bfw erzeugen
+				awayNr = Integer.valueOf(away);
+				awayNr = awayNr +1;
+				System.out.println(awayNr);
+				try {
+					bfw = new BufferedWriter(new FileWriter("statistics.txt"));
+					bfw.write(came);
+					bfw.write(";");
+					bfw.write(there);
+					bfw.write(";");
+					bfw.write(awayNr);
+					bfw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			
 		});
 		frmAuschecken.getContentPane().add(btnCheckout);
 		

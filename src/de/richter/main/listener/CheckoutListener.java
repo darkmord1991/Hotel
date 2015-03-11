@@ -28,8 +28,8 @@ public class CheckoutListener implements ItemListener {
 	@Override
 	public void itemStateChanged(ItemEvent event) {
 		JComboBox<?> checkoutBox = (JComboBox<?>) event.getSource();
-		parent.setTextName(lastname.get(checkoutBox.getSelectedIndex()));
-		parent.setTextPrename(prename.get(checkoutBox.getSelectedIndex()));
+		parent.setTextName(lastname.get(checkoutBox.getSelectedIndex()-1));
+		parent.setTextPrename(prename.get(checkoutBox.getSelectedIndex()-1));
 	}
 
 }

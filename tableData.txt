@@ -1,2 +1,0 @@
-1;1;10.10.10;10.10.11;Müller;Lukas;Holzer Weg;16;56281;Emmelshausen;lukas_mueller@outlook.de;067476950;Zimmer;Zimmer;Zimmer
-2;2;04.03.14;05.03.14;Müller;Marius;Holzer Weg;16;56281;Emmelshausen;marius@outlook.de;123456789;Zimmer;Zimmer;Zimmer

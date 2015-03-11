@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -37,6 +38,10 @@ import javax.swing.DefaultComboBoxModel;
 public class CheckinWindow {
 	// Globale Variablen
 	private int zeile;
+	
+	private String came;
+	private String there;
+	private String away;
 	
 	private JFrame frmEinchecken;
 	private JTextField textFieldStart;
@@ -70,9 +75,6 @@ public class CheckinWindow {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public CheckinWindow() {
 		initialize();
 		// Tabelleninhalt (vorhanden) einfügen
@@ -99,12 +101,31 @@ public class CheckinWindow {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		// Statistiken laden
+		BufferedReader stats_br = null;
+		String stats;
+
+			try {
+				stats_br = new BufferedReader(new FileReader("statistics.txt"));
+				while ((stats = stats_br.readLine()) != null) {
+					System.out.println(stats);
+					String[] arr = stats.split(";");
+					came = arr[0];
+					there = arr[1];
+					away = arr[2];
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		frmEinchecken = new JFrame();
 		frmEinchecken.setTitle("Einchecken");
 		frmEinchecken.setBounds(100, 100, 1351, 400);
@@ -202,8 +223,8 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(textFieldPhone);
 		
 		JComboBox comboBoxPersons = new JComboBox();
-		comboBoxPersons.setModel(new DefaultComboBoxModel(new String[] {"Zimmer", "Room", "Rom"}));
-		comboBoxPersons.setBounds(391, 64, 96, 20);
+		comboBoxPersons.setModel(new DefaultComboBoxModel(new String[] {"Bitte ausw\u00E4hlen", "1", "2", "3", "4", "5", "6"}));
+		comboBoxPersons.setBounds(391, 64, 123, 20);
 		frmEinchecken.getContentPane().add(comboBoxPersons);
 		
 		JLabel lblPersonen = new JLabel("Personen");
@@ -215,8 +236,8 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(lblZimmerkategorie);
 		
 		JComboBox comboBoxPension = new JComboBox();
-		comboBoxPension.setModel(new DefaultComboBoxModel(new String[] {"Zimmer", "Room", "Rom"}));
-		comboBoxPension.setBounds(391, 139, 96, 20);
+		comboBoxPension.setModel(new DefaultComboBoxModel(new String[] {"Bitte ausw\u00E4hlen", "Bed and Breakfast", "Halbpension", "Vollpension"}));
+		comboBoxPension.setBounds(391, 139, 123, 20);
 		frmEinchecken.getContentPane().add(comboBoxPension);
 		
 		JLabel lblRoom = new JLabel("Zimmerkategorie");
@@ -224,8 +245,8 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(lblRoom);
 		
 		JComboBox comboBoxRoom = new JComboBox();
-		comboBoxRoom.setModel(new DefaultComboBoxModel(new String[] {"Zimmer", "Room", "Rom"}));
-		comboBoxRoom.setBounds(391, 205, 96, 20);
+		comboBoxRoom.setModel(new DefaultComboBoxModel(new String[] {"Bitte ausw\u00E4hlen", "Economy", "Business", "Suite"}));
+		comboBoxRoom.setBounds(391, 205, 123, 20);
 		frmEinchecken.getContentPane().add(comboBoxRoom);
 		
 		tableCheckin = new JTable();
@@ -278,7 +299,7 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(scrollPane);
 		
 		JButton btnCheckin = new JButton("Einchecken");
-		btnCheckin.setBounds(391, 287, 110, 31);
+		btnCheckin.setBounds(10, 211, 110, 31);
 		frmEinchecken.getContentPane().add(btnCheckin);
 		
 		JButton btnClose = new JButton("Schlie\u00DFen");
@@ -288,7 +309,7 @@ public class CheckinWindow {
 				frmEinchecken.setVisible(false);
 			}
 		});
-		btnClose.setBounds(391, 324, 110, 31);
+		btnClose.setBounds(10, 308, 110, 31);
 		frmEinchecken.getContentPane().add(btnClose);
 		
 		JLabel lblRoomnumber = new JLabel("Zimmernummer");
@@ -299,6 +320,41 @@ public class CheckinWindow {
 		textFieldRoomnumber.setColumns(10);
 		textFieldRoomnumber.setBounds(391, 259, 96, 20);
 		frmEinchecken.getContentPane().add(textFieldRoomnumber);
+		
+		JButton btnSave = new JButton("Speichern");
+		btnSave.setBounds(10, 262, 110, 31);
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// Tabelleninhalt wird exportiert
+				BufferedWriter bfw;
+				try {
+					bfw = new BufferedWriter(new FileWriter("tableData.txt"));
+					// Spaltennamen auch in Datei schreiben (Falls nötig)
+//					for (int i = 0; i < tableCheckin.getColumnCount(); i++) {
+//						bfw.write(tableCheckin.getColumnName(i));
+//						bfw.write("\t");
+//					}
+					for (int i = 0; i < tableCheckin.getRowCount()-1; i++) {
+						for (int j = 0; j < tableCheckin.getColumnCount(); j++) {
+							System.out.println(j); 
+//							System.out.println(tableCheckin.getValueAt(i, j));
+							bfw.write((String) (tableCheckin.getValueAt(i, j)));
+							if (j < (tableCheckin.getColumnCount()-1)) {
+							bfw.write(";");
+							}
+					    }
+						bfw.newLine();
+					  }
+					  bfw.close();	
+					  System.out.println("Daten gespeichert!");
+				} catch (IOException e) {
+					// TODO Auto-generated ceatch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
+		frmEinchecken.getContentPane().add(btnSave);
 		// Actions
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -352,33 +408,6 @@ public class CheckinWindow {
 				textFieldCity.setText("");
 				textFieldMail.setText("");
 				textFieldPhone.setText("");
-				
-				// Tabelleninhalt wird exportiert
-				BufferedWriter bfw;
-				try {
-					bfw = new BufferedWriter(new FileWriter("tableData.txt"));
-					// Spaltennamen auch in Datei schreiben (Falls nötig)
-//					for (int i = 0; i < tableCheckin.getColumnCount(); i++) {
-//						bfw.write(tableCheckin.getColumnName(i));
-//						bfw.write("\t");
-//					}
-					for (int i = 0; i < tableCheckin.getRowCount()-1; i++) {
-						for (int j = 0; j < tableCheckin.getColumnCount(); j++) {
-							System.out.println(j); 
-//							System.out.println(tableCheckin.getValueAt(i, j));
-							bfw.write((String) (tableCheckin.getValueAt(i, j)));
-							if (j < (tableCheckin.getColumnCount()-1)) {
-							bfw.write(";");
-							}
-					    }
-						bfw.newLine();
-					  }
-					  bfw.close();	
-					  System.out.println("Daten gespeichert!");
-				} catch (IOException e) {
-					// TODO Auto-generated ceatch block
-					e.printStackTrace();
-				}
 			}	
 		});
 
