@@ -49,21 +49,21 @@ public class StatisticsWindow {
 	 */
 	private void initialize() {
 		// Statistiken laden
-				BufferedReader stats_br = null;
-				String stats;
-					try {
-						stats_br = new BufferedReader(new FileReader("statistics.txt"));
-						while ((stats = stats_br.readLine()) != null) {
-							System.out.println(stats);
-							String[] arr = stats.split(";");
-							came = arr[0];
-							there = arr[1];
-							away = arr[2];
-						}
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+		BufferedReader stats_br = null;
+		String stats;
+		try {
+			stats_br = new BufferedReader(new FileReader("statistics.txt"));
+			while ((stats = stats_br.readLine()) != null) {
+				System.out.println(stats);
+				String[] arr = stats.split(";");
+				came = arr[0];
+				there = arr[1];
+				away = arr[2];
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 					
 		frmStatistics = new JFrame();
 		frmStatistics.setBounds(100, 100, 280, 210);

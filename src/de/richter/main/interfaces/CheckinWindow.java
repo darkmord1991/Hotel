@@ -30,6 +30,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
@@ -38,6 +40,9 @@ import javax.swing.DefaultComboBoxModel;
 public class CheckinWindow {
 	// Globale Variablen
 	private int zeile;
+	
+	// Datumsvariable
+	private String date_old;
 	
 	// Statistikvariablen
 	private int came;
@@ -122,14 +127,54 @@ public class CheckinWindow {
 				away = Integer.parseInt(arr[2]);
 			}
 
-			// Statistikvariable auf 0 setzen
-			came = 0;
-
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
+		
+		// Datum aus Datei einlesen
+		BufferedReader date_br = null;
+
+		try {
+			date_br = new BufferedReader(new FileReader("date.txt"));
+			date_old = date_br.readLine();
+			System.out.println("Datum alt:\t" + date_old);
+			}
+		 catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Calendar cal = Calendar.getInstance();
+		Date newdate = cal.getTime();
+		String s_newdate = newdate.toString().substring(0, 10);
+		System.out.println("Datum aktuell:\t" + s_newdate);
+		
+		// Datumsexport
+		BufferedWriter bfw_date;
+		try {
+			bfw_date = new BufferedWriter(new FileWriter("date.txt"));
+			bfw_date.write(s_newdate);
+			bfw_date.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// Statistikvariable auf 0 setzen, wenn neues Datum erkannt wird. 
+		// Frage: Wieso erkennt er nicht, dass das Datum gleich ist?
+	/**	System.out.println(date_old);
+		System.out.println(date_old.length());
+		System.out.println(s_newdate);
+		System.out.println(date_old.length()); **/
+		if (date_old.equalsIgnoreCase(s_newdate)) {
+			System.out.println("Kein neues Datum, Variable bleibt 'Gäste/Tag'-Variable bleibt gleich!");
+		}
+		else {
+			came = 0;
+			System.out.println("Gäste/Tag-Variable wurde auf 0 gesetzt!");
+		}
+		
 		frmEinchecken = new JFrame();
 		frmEinchecken.setTitle("Einchecken");
 		frmEinchecken.setBounds(100, 100, 1351, 400);
