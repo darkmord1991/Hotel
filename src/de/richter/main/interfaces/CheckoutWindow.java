@@ -29,12 +29,9 @@ import javax.swing.DefaultComboBoxModel;
 
 public class CheckoutWindow {
 	
-	private String came;
-	private int cameNr;
-	private String there;
-	private int thereNr;
-	private String away;
-	private int awayNr;
+	private int came;
+	private int there;
+	private int away;
 
 	private JFrame frmAuschecken;
 	private JTextField textFieldName;
@@ -105,9 +102,9 @@ public class CheckoutWindow {
 			while ((stats = stats_br.readLine()) != null) {
 				System.out.println(stats);
 				String[] arr = stats.split(";");
-				came = arr[0];
-				there = arr[1];
-				away = arr[2];
+				came = Integer.parseInt(arr[0]);
+				there = Integer.parseInt(arr[1]);
+				away = Integer.parseInt(arr[2]);
 			}
 
 		} catch (IOException e) {
@@ -187,21 +184,24 @@ public class CheckoutWindow {
 				}
 				
 				// Hier noch herausfinden, wieso er keine Datei abspeichert. Evtl. neuen Bfw erzeugen
-				awayNr = Integer.valueOf(away);
-				awayNr = awayNr +1;
-				System.out.println(awayNr);
+				away = away+1;
+				String came, there, away;
+				came = "" + CheckoutWindow.this.came;
+				there = "" + CheckoutWindow.this.there;
+				away = "" + CheckoutWindow.this.away;
 				try {
 					bfw = new BufferedWriter(new FileWriter("statistics.txt"));
 					bfw.write(came);
 					bfw.write(";");
 					bfw.write(there);
 					bfw.write(";");
-					bfw.write(awayNr);
+					bfw.write(away);
 					bfw.close();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+
 			}
 			
 		});

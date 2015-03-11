@@ -39,9 +39,10 @@ public class CheckinWindow {
 	// Globale Variablen
 	private int zeile;
 	
-	private String came;
-	private String there;
-	private String away;
+	// Statistikvariablen
+	private int came;
+	private int there;
+	private int away;
 	
 	private JFrame frmEinchecken;
 	private JTextField textFieldStart;
@@ -76,7 +77,7 @@ public class CheckinWindow {
 	}
 
 	public CheckinWindow() {
-		initialize();
+		initialize();		
 		// Tabelleninhalt (vorhanden) einfügen
 		zeile = 0;
 		BufferedReader br = null;
@@ -111,20 +112,23 @@ public class CheckinWindow {
 		// Statistiken laden
 		BufferedReader stats_br = null;
 		String stats;
-
-			try {
-				stats_br = new BufferedReader(new FileReader("statistics.txt"));
-				while ((stats = stats_br.readLine()) != null) {
-					System.out.println(stats);
-					String[] arr = stats.split(";");
-					came = arr[0];
-					there = arr[1];
-					away = arr[2];
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			stats_br = new BufferedReader(new FileReader("statistics.txt"));
+			while ((stats = stats_br.readLine()) != null) {
+				System.out.println(stats);
+				String[] arr = stats.split(";");
+				came = Integer.parseInt(arr[0]);
+				there = Integer.parseInt(arr[1]);
+				away = Integer.parseInt(arr[2]);
 			}
+
+			// Statistikvariable auf 0 setzen
+			came = 0;
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 			
 		frmEinchecken = new JFrame();
 		frmEinchecken.setTitle("Einchecken");
@@ -351,6 +355,25 @@ public class CheckinWindow {
 					// TODO Auto-generated ceatch block
 					e.printStackTrace();
 				}
+				
+				// Statistikexport
+				there = tableCheckin.getRowCount()-1; // -1 wegen der letzten leeren Zeile in der Tabelle!
+				String came, there, away;
+				came = "" + CheckinWindow.this.came;
+				there = "" + CheckinWindow.this.there;
+				away = "" + CheckinWindow.this.away;
+				try {
+					bfw = new BufferedWriter(new FileWriter("statistics.txt"));
+					bfw.write(came);
+					bfw.write(";");
+					bfw.write(there);
+					bfw.write(";");
+					bfw.write(away);
+					bfw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 		});
@@ -408,6 +431,10 @@ public class CheckinWindow {
 				textFieldCity.setText("");
 				textFieldMail.setText("");
 				textFieldPhone.setText("");
+				
+				// Gesamtstatistik erhöhen
+				came = came + 1;
+				System.out.println("Tägliche Gäste-Variable wurde erhöht!");
 			}	
 		});
 
