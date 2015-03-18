@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 
-import de.richter.main.interfaces.MainWindow;
 import de.richter.main.listener.CheckoutListener;
 
 import java.awt.Font;
@@ -18,7 +17,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -38,6 +36,7 @@ public class CheckoutWindow {
 	private JTextField textFieldPrename;
 	
 	//Variablen
+	@SuppressWarnings("unused")
 	private int zeile = 0;
 	List<String> table = new ArrayList<String>();
 	List<String> boxitems = new ArrayList<String>();
@@ -118,8 +117,8 @@ public class CheckoutWindow {
 //		frmAuschecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht nötig
 		frmAuschecken.getContentPane().setLayout(null);
 
-		JComboBox comboBoxGuestnumber = new JComboBox();
-		comboBoxGuestnumber.setModel(new DefaultComboBoxModel(new String[] {"Bitte ausw\u00E4hlen"}));
+		JComboBox<String> comboBoxGuestnumber = new JComboBox<>();
+		comboBoxGuestnumber.setModel(new DefaultComboBoxModel<>(new String[] {"Bitte ausw\u00E4hlen"}));
 //		for (int i=0; i < boxitems.size(); i++) {
 		for (String item : boxitems) {
 			comboBoxGuestnumber.addItem(item);

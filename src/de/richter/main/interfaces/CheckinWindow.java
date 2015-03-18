@@ -2,31 +2,19 @@ package de.richter.main.interfaces;
 
 import java.awt.EventQueue;
 
-import javafx.scene.control.TableCell;
-
 import javax.swing.JFrame;
-import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
-import javax.swing.JSplitPane;
-import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
 import de.richter.main.model.CheckinModel;
 
 import java.awt.Font;
 
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -63,6 +51,8 @@ public class CheckinWindow {
 	private JTable tableCheckin;
 	private JTextField textFieldGuestnumber;
 	private JTextField textFieldRoomnumber;
+
+	private JButton btnClose;
 
 	/**
 	 * Launch the application.
@@ -353,7 +343,7 @@ public class CheckinWindow {
 		btnCheckin.setBounds(10, 211, 110, 31);
 		frmEinchecken.getContentPane().add(btnCheckin);
 
-		JButton btnClose = new JButton("Schlie\u00DFen");
+		btnClose = new JButton("Schlie\u00DFen");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Einchecken wird geschlossen");
@@ -489,6 +479,14 @@ public class CheckinWindow {
 			}
 		});
 
+	}
+
+	public JButton getBtnClose() {
+		return btnClose;
+	}
+
+	public void setBtnClose(JButton btnClose) {
+		this.btnClose = btnClose;
 	}
 
 	/**
