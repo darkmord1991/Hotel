@@ -68,7 +68,7 @@ public class StatisticsWindow {
 		frmStatistics = new JFrame();
 		frmStatistics.setBounds(100, 100, 280, 210);
 		frmStatistics.setTitle("Statistiken");
-		frmStatistics.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frmStatistics.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht nötig
 		frmStatistics.getContentPane().setLayout(null);
 		
 		JLabel lblGuestday = new JLabel("G\u00E4ste/Tag:");

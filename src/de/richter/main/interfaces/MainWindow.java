@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import de.richter.main.listener.WindowListener;
+
 public class MainWindow {
 
 	private JFrame frmHotelprogramm;
@@ -45,12 +47,18 @@ public class MainWindow {
 		frmHotelprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmHotelprogramm.getContentPane().setLayout(null);
 		
+		// WindowListener
+		WindowListener wl = new WindowListener(frmHotelprogramm);
+		
+		
 		//Einchecken
 		JButton btnCheckin = new JButton("Einchecken");
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Einchecken");
 				CheckinWindow checkinWindow = new CheckinWindow();
+				frmHotelprogramm.setVisible(false);
+				checkinWindow.getFrmEinchecken().addWindowListener(wl);
 				checkinWindow.getFrmEinchecken().setLocationRelativeTo(null);
 				checkinWindow.getFrmEinchecken().setVisible(true);
 			}
@@ -64,6 +72,7 @@ public class MainWindow {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Auschecken");
 				CheckoutWindow checkoutWindow = new CheckoutWindow();
+				checkoutWindow.getFrmAuschecken().addWindowListener(wl);
 				checkoutWindow.getFrmAuschecken().setLocationRelativeTo(null);
 				checkoutWindow.getFrmAuschecken().setVisible(true);
 			}
@@ -77,6 +86,7 @@ public class MainWindow {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Zimmerstatus");
 				RoomstatusWindow roomstatusWindow = new RoomstatusWindow();
+				roomstatusWindow.getFrmRoomstatus().addWindowListener(wl);
 				roomstatusWindow.getFrmRoomstatus().setLocationRelativeTo(null);
 				roomstatusWindow.getFrmRoomstatus().setVisible(true);
 			}
@@ -90,6 +100,7 @@ public class MainWindow {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Statistiken");
 				StatisticsWindow statisticsWindow = new StatisticsWindow();
+				statisticsWindow.getFrmStatistics().addWindowListener(wl);
 				statisticsWindow.getFrmStatistics().setLocationRelativeTo(null);
 				statisticsWindow.getFrmStatistics().setVisible(true);
 			}

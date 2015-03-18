@@ -71,7 +71,7 @@ public class RoomstatusWindow {
 		frmRoomstatus = new JFrame();
 		frmRoomstatus.setBounds(100, 100, 450, 300);
 		frmRoomstatus.setTitle("Zimmerstatus");
-		frmRoomstatus.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frmRoomstatus.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht nötig
 		frmRoomstatus.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();

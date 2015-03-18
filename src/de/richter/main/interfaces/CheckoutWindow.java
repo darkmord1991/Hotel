@@ -65,7 +65,7 @@ public class CheckoutWindow {
 	 * Create the application.
 	 * @throws IOException 
 	 */
-	public CheckoutWindow() throws IOException {
+	public CheckoutWindow() {
 		initialize();
 	}
 
@@ -115,7 +115,7 @@ public class CheckoutWindow {
 		frmAuschecken = new JFrame();
 		frmAuschecken.setTitle("Auschecken");
 		frmAuschecken.setBounds(100, 100, 450, 200);
-		frmAuschecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frmAuschecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht nötig
 		frmAuschecken.getContentPane().setLayout(null);
 
 		JComboBox comboBoxGuestnumber = new JComboBox();

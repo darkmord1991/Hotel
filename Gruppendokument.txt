@@ -1,0 +1,25 @@
+Mitglieder:
+- Lukas Müller
+- Nils Reuter
+- Florian Schmidt
+
+Stand:
+Soweit funktionen die Sachen aus dem Pflichtenheft. Gäste können hinzugefügt, entfernt werden. Also den Hauptteil des Programms, wenn man von dem Status der
+Objektorientierung absieht, betrachte ich als fast fertig. 
+Der Zimmerstatus ist abrufbar. Es erfolgt sogar ein Datumsvariablenausgleich der entscheidet, ob die Tagesvariable resettet wird oder nicht.
+Es gibt die Zimmerkategorien und die Arrangementswahl.
+Statistiken sind abrufbar und werden ja nach Interaktion (Hinzufügen oder Entfernen) aktualisiert.
+
+Nächsten Schritte:
+
+Ein paar Sachen sind schon objektorientiert geschrieben.
+Jedoch müssen noch einige Sachen objektorientiert verlagert werden. Das ist das größte Schritt.
+Beispiel: Daten in Tabelle schreiben in eine eigene Methode, etc.
+
+Optionale Verbesserungen könnte die Dynamik des Programms sein, d.h. automatische
+Gastnummeraktualisierung, wenn zwischen 2 und 4 die 3 fehlt, also eine Neuindexierung.
+
+Die Sachen aus den Wunschkriterien des Pflichtenhefts sind auch noch zu implementieren,
+wenn genug Zeit dazu ist. Ansonsten müssen wir noch herausfinden, wie man wenn man die Tabelle in der GUI
+bearbeitet die Änderungen auch dort abspeichern kann und nicht nur, wenn man einen Gast hinzufügt. Das wäre auch nützlich,
+wenn man dem Kunden ein anderes Zimmer geben möchte.
