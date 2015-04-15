@@ -42,6 +42,7 @@ public class CheckoutWindow {
 	List<String> boxitems = new ArrayList<String>();
 	List<String> prename = new ArrayList<String>();
 	List<String> lastname = new ArrayList<String>();
+	private JButton btnClose;
 
 	/**
 	 * Launch the application.
@@ -69,7 +70,7 @@ public class CheckoutWindow {
 	}
 
 	private void initialize() {
-		// Löschdaten einlesen
+		// Lï¿½schdaten einlesen
 		zeile = 0;
 		BufferedReader br = null;
 		String line;
@@ -82,8 +83,8 @@ public class CheckoutWindow {
 				String[] arr = line.split(";");
 				// Tabelleninhalt wird in Liste gespeichert
 				table.add(line);
-				// Als nächste die Index der Gastnummer bekommen, aus der
-				// Table-liste löschen und Datei neu abspeichern!
+				// Als nï¿½chste die Index der Gastnummer bekommen, aus der
+				// Table-liste lï¿½schen und Datei neu abspeichern!
 				boxitems.add(arr[0]);
 				lastname.add(arr[4]);
 				prename.add(arr[5]);
@@ -114,7 +115,7 @@ public class CheckoutWindow {
 		frmAuschecken = new JFrame();
 		frmAuschecken.setTitle("Auschecken");
 		frmAuschecken.setBounds(100, 100, 450, 200);
-//		frmAuschecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht nötig
+//		frmAuschecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht nï¿½tig
 		frmAuschecken.getContentPane().setLayout(null);
 
 		JComboBox<String> comboBoxGuestnumber = new JComboBox<>();
@@ -162,7 +163,7 @@ public class CheckoutWindow {
 		
 		JButton btnCheckout = new JButton("Auschecken");
 		btnCheckout.setBounds(25, 114, 116, 36);
-		// Hier weitermachen (Datei überschreiben etc.)
+		// Hier weitermachen (Datei ï¿½berschreiben etc.)
 		btnCheckout.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -177,7 +178,7 @@ public class CheckoutWindow {
 					}
 					  bfw.close();	
 			
-				System.out.println("Gastdaten wurden gelöscht!");
+				System.out.println("Gastdaten wurden gelï¿½scht!");
 				} catch (IOException e) {
 				e.printStackTrace();
 				}
@@ -206,15 +207,17 @@ public class CheckoutWindow {
 		});
 		frmAuschecken.getContentPane().add(btnCheckout);
 		
-		JButton btnClose = new JButton("Schlie\u00DFen");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Auschecken wird geschlossen");
-				frmAuschecken.setVisible(false);
-			}
-		});
+		btnClose = new JButton("Schlie\u00DFen");
 		btnClose.setBounds(295, 114, 104, 36);
 		frmAuschecken.getContentPane().add(btnClose);
+	}
+	
+	public JButton getBtnClose() {
+		return btnClose;
+	}
+	
+	public void setBtnClose(JButton btnClose) {
+		this.btnClose = btnClose;
 	}
 
 	public JFrame getFrmAuschecken() {

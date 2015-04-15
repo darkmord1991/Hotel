@@ -48,9 +48,15 @@ public class MainWindow {
 		frmHotelprogramm.getContentPane().setLayout(null);
 		
 		CheckinWindow checkinWindow = new CheckinWindow();
+		CheckoutWindow checkoutWindow = new CheckoutWindow();
+		RoomstatusWindow roomstatusWindow = new RoomstatusWindow();
+		StatisticsWindow statisticsWindow = new StatisticsWindow();
+		
 		// WindowListener
 		WindowListener wl = new WindowListener(frmHotelprogramm, checkinWindow.getFrmEinchecken());
-		
+		WindowListener wl2 = new WindowListener(frmHotelprogramm, checkoutWindow.getFrmAuschecken());
+		WindowListener wl3 = new WindowListener(frmHotelprogramm, roomstatusWindow.getFrmRoomstatus());
+		WindowListener wl4 = new WindowListener(frmHotelprogramm, statisticsWindow.getFrmStatistics());
 		
 		//Einchecken
 		JButton btnCheckin = new JButton("Einchecken");
@@ -59,6 +65,7 @@ public class MainWindow {
 				System.out.println("Einchecken");
 				frmHotelprogramm.setVisible(false);
 				checkinWindow.getFrmEinchecken().addWindowListener(wl);
+				checkinWindow.getBtnClose().addActionListener(wl);
 				checkinWindow.getFrmEinchecken().setLocationRelativeTo(null);
 				checkinWindow.getFrmEinchecken().setVisible(true);
 			}
@@ -71,8 +78,8 @@ public class MainWindow {
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Auschecken");
-				CheckoutWindow checkoutWindow = new CheckoutWindow();
-				checkoutWindow.getFrmAuschecken().addWindowListener(wl);
+				checkoutWindow.getFrmAuschecken().addWindowListener(wl2);
+				checkoutWindow.getBtnClose().addActionListener(wl2);
 				frmHotelprogramm.setVisible(false);
 				checkoutWindow.getFrmAuschecken().setLocationRelativeTo(null);
 				checkoutWindow.getFrmAuschecken().setVisible(true);
@@ -86,8 +93,8 @@ public class MainWindow {
 		btnRoomstatus.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Zimmerstatus");
-				RoomstatusWindow roomstatusWindow = new RoomstatusWindow();
-				roomstatusWindow.getFrmRoomstatus().addWindowListener(wl);
+				roomstatusWindow.getFrmRoomstatus().addWindowListener(wl3);
+				roomstatusWindow.getBtnClose().addActionListener(wl3);
 				frmHotelprogramm.setVisible(false);
 				roomstatusWindow.getFrmRoomstatus().setLocationRelativeTo(null);
 				roomstatusWindow.getFrmRoomstatus().setVisible(true);
@@ -101,8 +108,8 @@ public class MainWindow {
 		btnStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Statistiken");
-				StatisticsWindow statisticsWindow = new StatisticsWindow();
-				statisticsWindow.getFrmStatistics().addWindowListener(wl);
+				statisticsWindow.getFrmStatistics().addWindowListener(wl4);
+				statisticsWindow.getBtnClose().addActionListener(wl4);
 				frmHotelprogramm.setVisible(false);
 				statisticsWindow.getFrmStatistics().setLocationRelativeTo(null);
 				statisticsWindow.getFrmStatistics().setVisible(true);

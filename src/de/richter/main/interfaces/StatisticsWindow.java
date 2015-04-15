@@ -18,6 +18,7 @@ public class StatisticsWindow {
 	private String away;
 
 	private JFrame frmStatistics;
+	private JButton btnClose;
 
 	/**
 	 * Launch the application.
@@ -64,7 +65,7 @@ public class StatisticsWindow {
 		frmStatistics = new JFrame();
 		frmStatistics.setBounds(100, 100, 280, 210);
 		frmStatistics.setTitle("Statistiken");
-//		frmStatistics.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht nötig
+//		frmStatistics.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht nï¿½tig
 		frmStatistics.getContentPane().setLayout(null);
 		
 		JLabel lblGuestday = new JLabel("G\u00E4ste/Tag:");
@@ -79,13 +80,7 @@ public class StatisticsWindow {
 		lblGuestaway.setBounds(30, 90, 189, 14);
 		frmStatistics.getContentPane().add(lblGuestaway);
 		
-		JButton btnClose = new JButton("Schlie\u00DFen");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Statistiken werden geschlossen");
-				frmStatistics.setVisible(false);
-			}
-		});
+		btnClose = new JButton("Schlie\u00DFen");
 		btnClose.setBounds(83, 131, 95, 29);
 		frmStatistics.getContentPane().add(btnClose);
 		
@@ -112,4 +107,13 @@ public class StatisticsWindow {
 	public void setFrmStatistics(JFrame frmStatistics) {
 		this.frmStatistics = frmStatistics;
 	}
+	
+	public JButton getBtnClose() {
+		return btnClose;
+	}
+	
+	public void setBtnClose(JButton btnClose) {
+		this.btnClose = btnClose;
+	}
+
 }

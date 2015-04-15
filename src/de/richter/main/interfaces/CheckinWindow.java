@@ -73,7 +73,7 @@ public class CheckinWindow {
 
 	public CheckinWindow() {
 		initialize();
-		// Tabelleninhalt (vorhanden) einfügen
+		// Tabelleninhalt (vorhanden) einfï¿½gen
 		zeile = 0;
 		BufferedReader br = null;
 		String line;
@@ -157,17 +157,17 @@ public class CheckinWindow {
 		 **/
 		if (date_old.equalsIgnoreCase(s_newdate)) {
 			System.out
-					.println("Kein neues Datum, Variable bleibt 'Gäste/Tag'-Variable bleibt gleich!");
+					.println("Kein neues Datum, Variable bleibt 'Gï¿½ste/Tag'-Variable bleibt gleich!");
 		} else {
 			came = 0;
-			System.out.println("Gäste/Tag-Variable wurde auf 0 gesetzt!");
+			System.out.println("Gï¿½ste/Tag-Variable wurde auf 0 gesetzt!");
 		}
 
 		frmEinchecken = new JFrame();
 		frmEinchecken.setTitle("Einchecken");
 		frmEinchecken.setBounds(100, 100, 1351, 400);
 		// frmEinchecken.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		// //Wegen WindowListener nicht nötig
+		// //Wegen WindowListener nicht nï¿½tig
 		frmEinchecken.getContentPane().setLayout(null);
 
 		textFieldStart = new JTextField();
@@ -292,8 +292,8 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(comboBoxRoom);
 
 		tableCheckin = new JTable();
-		// Vorsicht! Ändert immer wieder auf DefaultTableModel, muss auf
-		// CheckinModel geändert werden
+		// Vorsicht! ï¿½ndert immer wieder auf DefaultTableModel, muss auf
+		// CheckinModel geï¿½ndert werden
 		tableCheckin.setModel(new CheckinModel(new Object[][] { { null, null,
 				null, null, null, null, null, null, null, null, null, null,
 				null, null, null }, }, new String[] { "Gastnr.", "Zimmernr.",
@@ -344,12 +344,6 @@ public class CheckinWindow {
 		frmEinchecken.getContentPane().add(btnCheckin);
 
 		btnClose = new JButton("Schlie\u00DFen");
-		btnClose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.println("Einchecken wird geschlossen");
-				frmEinchecken.setVisible(false);
-			}
-		});
 		btnClose.setBounds(10, 308, 110, 31);
 		frmEinchecken.getContentPane().add(btnClose);
 
@@ -370,7 +364,7 @@ public class CheckinWindow {
 				BufferedWriter bfw;
 				try {
 					bfw = new BufferedWriter(new FileWriter("tableData.txt"));
-					// Spaltennamen auch in Datei schreiben (Falls nötig)
+					// Spaltennamen auch in Datei schreiben (Falls nï¿½tig)
 					// for (int i = 0; i < tableCheckin.getColumnCount(); i++) {
 					// bfw.write(tableCheckin.getColumnName(i));
 					// bfw.write("\t");
@@ -441,8 +435,8 @@ public class CheckinWindow {
 				persons = String.valueOf(comboBoxPersons.getSelectedItem());
 				pension = String.valueOf(comboBoxPension.getSelectedItem());
 				room = String.valueOf(comboBoxRoom.getSelectedItem());
-				// Textfeldinhalt wird dem Tablemodel übergeben
-				// Variablen zum Zählen müssen eingefügt werden für 0,0 - 0,10
+				// Textfeldinhalt wird dem Tablemodel ï¿½bergeben
+				// Variablen zum Zï¿½hlen mï¿½ssen eingefï¿½gt werden fï¿½r 0,0 - 0,10
 				// usw.
 				getCheckinModel().setValueAt(guestnumber, zeile, stelle++);
 				getCheckinModel().setValueAt(roomnumber, zeile, stelle++);
@@ -473,9 +467,9 @@ public class CheckinWindow {
 				textFieldMail.setText("");
 				textFieldPhone.setText("");
 
-				// Gesamtstatistik erhöhen
+				// Gesamtstatistik erhï¿½hen
 				came = came + 1;
-				System.out.println("Tägliche Gäste-Variable wurde erhöht!");
+				System.out.println("Tï¿½gliche Gï¿½ste-Variable wurde erhï¿½ht!");
 			}
 		});
 
@@ -492,7 +486,7 @@ public class CheckinWindow {
 	/**
 	 * Methode getCheckinModel
 	 * 
-	 * @return = das Model für setLastValueAt
+	 * @return = das Model fï¿½r setLastValueAt
 	 */
 	private CheckinModel getCheckinModel() {
 		return ((CheckinModel) tableCheckin.getModel());

@@ -22,7 +22,7 @@ public class RoomstatusModel extends DefaultTableModel {
 
 	}
 	
-	// Hier wird der Werte gesetzt und eine neue Zeile wird hinzugefügt
+	// Hier wird der Werte gesetzt und eine neue Zeile wird hinzugefï¿½gt
 	public void setLastValueAt(Object arg0, int arg1, int arg2) {
 		setValueAt(arg0, arg1, arg2);
 		super.addRow(new Object[11]);

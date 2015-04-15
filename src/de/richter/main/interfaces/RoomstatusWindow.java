@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 
 public class RoomstatusWindow {
 	private int zeile, spalte;
@@ -37,31 +38,40 @@ public class RoomstatusWindow {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the application. √è
 	 */
 	public RoomstatusWindow() {
 		initialize();
 		// Inhalt aus Datendatei in Tabelle lesen
-		zeile = 0;
-		BufferedReader br = null;
-		String line;
-		try {
-			br = new BufferedReader(new FileReader("tableData.txt"));
-			while ((line = br.readLine()) != null) {
-				System.out.println(line);
-			// String aufsplitten
-			String[] arr = line.split(";");
-			spalte = 0;
-			getRoomstatusModel().setValueAt(arr[1], zeile, spalte++);
-			getRoomstatusModel().setValueAt(arr[13], zeile, spalte++);
-			getRoomstatusModel().setValueAt(arr[12], zeile, spalte++);
-			getRoomstatusModel().setValueAt(arr[0], zeile, spalte++);
-			getRoomstatusModel().setValueAt(arr[3], zeile, spalte++);
-			zeile++;
+		SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					zeile = 0;
+					String line;
+					BufferedReader br = new BufferedReader(new FileReader("tableData.txt"));
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+						// String aufsplitten
+						String[] arr = line.split(";");
+						spalte = 0;
+						getRoomstatusModel()
+								.setValueAt(arr[1], zeile, spalte++);
+						getRoomstatusModel().setValueAt(arr[13], zeile,
+								spalte++);
+						getRoomstatusModel().setValueAt(arr[12], zeile,
+								spalte++);
+						getRoomstatusModel()
+								.setValueAt(arr[0], zeile, spalte++);
+						getRoomstatusModel()
+								.setLastValueAt(arr[3], zeile, spalte++);
+						zeile++;
+					}
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		});
 	}
 
 	/**
@@ -71,26 +81,24 @@ public class RoomstatusWindow {
 		frmRoomstatus = new JFrame();
 		frmRoomstatus.setBounds(100, 100, 450, 300);
 		frmRoomstatus.setTitle("Zimmerstatus");
-//		frmRoomstatus.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht nˆtig
+		// frmRoomstatus.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen
+		// WindowListener nicht nÔøΩtig
 		frmRoomstatus.getContentPane().setLayout(null);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(0, 0, 434, 219);
 		frmRoomstatus.getContentPane().add(scrollPane);
-		
+
 		tableRoom = new JTable();
 		tableRoom.setModel(new de.richter.main.model.RoomstatusModel(
-		new Object[][] {
-				{null, null, null, null, null},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"Zimmernr.", "Zimmerart", "Pl\u00E4tze", "Gastnr.", "belegt bis"
-			}
-		));
-		// Um die Tabelle zu sehen unter ScrollPane einordnen und diese Codezeile einf¸gen:
+				new Object[][] { { null, null, null, null, null },
+						{ null, null, null, null, null }, }, new String[] {
+						"Zimmernr.", "Zimmerart", "Pl\u00E4tze", "Gastnr.",
+						"belegt bis" }));
+		// Um die Tabelle zu sehen unter ScrollPane einordnen und diese
+		// Codezeile einfÔøΩgen:
 		scrollPane.setViewportView(tableRoom);
-		
+
 		btnClose = new JButton("Schlie\u00DFen");
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -101,15 +109,17 @@ public class RoomstatusWindow {
 		btnClose.setBounds(149, 230, 134, 23);
 		frmRoomstatus.getContentPane().add(btnClose);
 	}
-	
+
 	/**
-	 * Methode getRoomstatusModel 
-	 * @return = das Model f¸r setLastValueAt
+	 * Methode getRoomstatusModel
+	 * 
+	 * @return = das Model fÔøΩr setLastValueAt
 	 */
 	private de.richter.main.model.RoomstatusModel getRoomstatusModel() {
-		return ((de.richter.main.model.RoomstatusModel)tableRoom.getModel());
-		// Syntax f¸r Eintr‰ge in CheckinWindow anschauen
+		return ((de.richter.main.model.RoomstatusModel) tableRoom.getModel());
+		// Syntax fÔøΩr EintrÔøΩge in CheckinWindow anschauen
 	}
+
 	public JFrame getFrmRoomstatus() {
 		return frmRoomstatus;
 	}
@@ -118,4 +128,13 @@ public class RoomstatusWindow {
 		this.frmRoomstatus = frmRoomstatus;
 	}
 	
+	public JButton getBtnClose() {
+		return btnClose;
+	}
+	
+	public void setBtnClose(JButton btnClose) {
+		this.btnClose = btnClose;
+	}
+
+
 }
