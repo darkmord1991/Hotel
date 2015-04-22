@@ -1,17 +1,5 @@
 package de.richter.main.interfaces;
 
-/**
- * 
- * 
- * 
- * WIE BEKOMMT MAN ES HIN, DASS JAVA DIE FRAMES IMMER KOMPLETT NEU AUFRUFT UND NICHT IMMER
- * NUR AM ANFANG DIE DATEN EINLIEST.
- * 
- * 
- * 
- * 
- */
-
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

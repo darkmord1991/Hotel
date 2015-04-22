@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+import de.richter.main.interfaces.MainWindow;
 
 public class WindowListener implements java.awt.event.WindowListener, ActionListener {
 	
@@ -39,6 +40,7 @@ public class WindowListener implements java.awt.event.WindowListener, ActionList
 		close.dispose();
 		parent.setVisible(true);
 		System.out.println("*** Windows-Listener switcht jetzt die Fenster ***");
+		de.richter.main.interfaces.MainWindow.main(null);
 	}
 
 	@Override
