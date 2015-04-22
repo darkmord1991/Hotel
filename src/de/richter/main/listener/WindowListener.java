@@ -5,8 +5,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
+
 import de.richter.main.interfaces.MainWindow;
 
+@SuppressWarnings("unused")
 public class WindowListener implements java.awt.event.WindowListener, ActionListener {
 	
 	private JFrame parent;

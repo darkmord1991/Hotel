@@ -2,6 +2,7 @@ package de.richter.main.model;
 
 import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("serial")
 public class RoomstatusModel extends DefaultTableModel {
 	private int roomnr;
 	private String roomCat;
