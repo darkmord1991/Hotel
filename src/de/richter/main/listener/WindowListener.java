@@ -1,5 +1,6 @@
 package de.richter.main.listener;
 
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -14,9 +15,12 @@ public class WindowListener implements java.awt.event.WindowListener, ActionList
 	private JFrame parent;
 	private JFrame close;
 	
-	public WindowListener (JFrame frmHotelprogramm, JFrame close) {
+	private MainWindow mainWindow;
+	
+	public WindowListener (JFrame frmHotelprogramm, JFrame close, MainWindow mainWindow2) {
 		this.parent = frmHotelprogramm;
 		this.close = close;
+		this.mainWindow = mainWindow2;
 	}
 	
 
@@ -41,8 +45,9 @@ public class WindowListener implements java.awt.event.WindowListener, ActionList
 	private void close() {
 		close.dispose();
 		parent.setVisible(true);
+		mainWindow.initialize();
 		System.out.println("*** Windows-Listener switcht jetzt die Fenster ***");
-		de.richter.main.interfaces.MainWindow.main(null);
+		
 	}
 
 	@Override

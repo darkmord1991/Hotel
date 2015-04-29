@@ -159,7 +159,26 @@ public class CheckinWindow {
 			System.out
 					.println("Kein neues Datum, Variable bleibt 'G�ste/Tag'-Variable bleibt gleich!");
 		} else {
+			
+			// Unten doppelt, falls man garnicht auf speichern klickt.
 			came = 0;
+			// Statistikoverride
+			String came, there, away;
+			came = "" + CheckinWindow.this.came;
+			there = "" + CheckinWindow.this.there;
+			away = "" + CheckinWindow.this.away;
+			try {
+				BufferedWriter bfw = new BufferedWriter(new FileWriter("statistics.txt"));
+				bfw.write(came);
+				bfw.write(";");
+				bfw.write(there);
+				bfw.write(";");
+				bfw.write(away);
+				bfw.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println("G�ste/Tag-Variable wurde auf 0 gesetzt!");
 		}
 

@@ -40,7 +40,8 @@ public class MainWindow {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
+		/** NEUINITIALISIERUNG klappt nicht -> fragen! **/
 		frmHotelprogramm = new JFrame();
 		frmHotelprogramm.setTitle("Hotelprogramm");
 		frmHotelprogramm.setBounds(100, 100, 250, 350);
@@ -53,10 +54,10 @@ public class MainWindow {
 		StatisticsWindow statisticsWindow = new StatisticsWindow();
 		
 		// WindowListener
-		WindowListener wl = new WindowListener(frmHotelprogramm, checkinWindow.getFrmEinchecken());
-		WindowListener wl2 = new WindowListener(frmHotelprogramm, checkoutWindow.getFrmAuschecken());
-		WindowListener wl3 = new WindowListener(frmHotelprogramm, roomstatusWindow.getFrmRoomstatus());
-		WindowListener wl4 = new WindowListener(frmHotelprogramm, statisticsWindow.getFrmStatistics());
+		WindowListener wl = new WindowListener(frmHotelprogramm, checkinWindow.getFrmEinchecken(), this);
+		WindowListener wl2 = new WindowListener(frmHotelprogramm, checkoutWindow.getFrmAuschecken(), this);
+		WindowListener wl3 = new WindowListener(frmHotelprogramm, roomstatusWindow.getFrmRoomstatus(), this);
+		WindowListener wl4 = new WindowListener(frmHotelprogramm, statisticsWindow.getFrmStatistics(), this);
 		
 		//Einchecken
 		JButton btnCheckin = new JButton("Einchecken");
@@ -68,6 +69,7 @@ public class MainWindow {
 				checkinWindow.getBtnClose().addActionListener(wl);
 				checkinWindow.getFrmEinchecken().setLocationRelativeTo(null);
 				checkinWindow.getFrmEinchecken().setVisible(true);
+				frmHotelprogramm.setVisible(false);
 			}
 		});
 		btnCheckin.setBounds(25, 23, 188, 63);

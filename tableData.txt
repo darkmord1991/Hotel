@@ -1,1 +1,1 @@
-1;1;22.04.15;23.04.15;M�ller;Lukas;Holzer Weg;16;56281;Emmelshausen;lukas_mueller@outlook.de;06747-6950;4;Vollpension;Business
+1;1;23.03.14;24.03.14l;Lukas;M�ller;Holzer Weg;16;56281;Emmelshausen;lukas@lukas.de;34567;Zimmer;Zimmer;Suite
