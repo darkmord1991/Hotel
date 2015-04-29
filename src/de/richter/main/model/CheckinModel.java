@@ -42,6 +42,13 @@ public class CheckinModel extends DefaultTableModel {
 	// {
 	//
 	// }
+	
+	public void removeAllRows() {
+	    for( int i = this.getRowCount() - 1; i >= 0; i-- ) {
+	    	/** VERURSACHT FEHLER NÄCHSTE STUNDE GUCKEN **/
+//	        this.removeRow(i);
+	    }
+	}
 
 	public int getGuestnumber() {
 		return guestnumber;

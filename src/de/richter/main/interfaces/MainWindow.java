@@ -41,7 +41,6 @@ public class MainWindow {
 	 * Initialize the contents of the frame.
 	 */
 	public void initialize() {
-		/** NEUINITIALISIERUNG klappt nicht -> fragen! **/
 		frmHotelprogramm = new JFrame();
 		frmHotelprogramm.setTitle("Hotelprogramm");
 		frmHotelprogramm.setBounds(100, 100, 250, 350);

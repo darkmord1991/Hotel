@@ -7,10 +7,10 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
+
 import de.richter.main.model.CheckinModel;
 
 import java.awt.Font;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -103,6 +103,18 @@ public class CheckinWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//Table-Model getten
+		tableCheckin = new JTable();
+		// Vorsicht! �ndert immer wieder auf DefaultTableModel, muss auf
+		// CheckinModel ge�ndert werden
+		tableCheckin.setModel(new CheckinModel(new Object[][] { { null, null,
+				null, null, null, null, null, null, null, null, null, null,
+				null, null, null }, }, new String[] { "Gastnr.", "Zimmernr.",
+				"von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ",
+				"Stadt", "E-Mail", "Telefon", "Personen", "Pensionsart",
+				"Zimmerkategorie" }));
+		//Tabelle zurücksetzen
+		getCheckinModel().removeAllRows();
 		// Statistiken laden
 		BufferedReader stats_br = null;
 		String stats;
@@ -310,16 +322,7 @@ public class CheckinWindow {
 				"Bitte ausw\u00E4hlen", "Economy", "Business", "Suite" }));
 		comboBoxRoom.setBounds(391, 205, 123, 20);
 		frmEinchecken.getContentPane().add(comboBoxRoom);
-
-		tableCheckin = new JTable();
-		// Vorsicht! �ndert immer wieder auf DefaultTableModel, muss auf
-		// CheckinModel ge�ndert werden
-		tableCheckin.setModel(new CheckinModel(new Object[][] { { null, null,
-				null, null, null, null, null, null, null, null, null, null,
-				null, null, null }, }, new String[] { "Gastnr.", "Zimmernr.",
-				"von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ",
-				"Stadt", "E-Mail", "Telefon", "Personen", "Pensionsart",
-				"Zimmerkategorie" }));
+		
 		tableCheckin.getColumnModel().getColumn(0).setPreferredWidth(47);
 		tableCheckin.getColumnModel().getColumn(2).setPreferredWidth(53);
 		tableCheckin.getColumnModel().getColumn(3).setPreferredWidth(57);
