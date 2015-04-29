@@ -67,6 +67,7 @@ public class MainWindow {
 				checkinWindow.getFrmEinchecken().addWindowListener(wl);
 				checkinWindow.getBtnClose().addActionListener(wl);
 				checkinWindow.getFrmEinchecken().setLocationRelativeTo(null);
+				initialize();
 				checkinWindow.getFrmEinchecken().setVisible(true);
 			}
 		});

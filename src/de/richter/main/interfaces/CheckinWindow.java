@@ -93,6 +93,7 @@ public class CheckinWindow {
 					}
 				}
 				zeile++;
+				System.out.println("\n Gesetzt in Zeile" + zeile + "\n");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -113,8 +114,6 @@ public class CheckinWindow {
 				"von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ",
 				"Stadt", "E-Mail", "Telefon", "Personen", "Pensionsart",
 				"Zimmerkategorie" }));
-		//Tabelle zurücksetzen
-		getCheckinModel().removeAllRows();
 		// Statistiken laden
 		BufferedReader stats_br = null;
 		String stats;
@@ -368,6 +367,12 @@ public class CheckinWindow {
 
 		btnClose = new JButton("Schlie\u00DFen");
 		btnClose.setBounds(10, 308, 110, 31);
+		btnClose.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//Tabelle zurücksetzen
+				getCheckinModel().removeAllRows();
+			}
+		});
 		frmEinchecken.getContentPane().add(btnClose);
 
 		JLabel lblRoomnumber = new JLabel("Zimmernummer");
