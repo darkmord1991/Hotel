@@ -78,6 +78,7 @@ public class CheckinWindow {
 		BufferedReader br = null;
 		String line;
 		try {
+			System.out.println("***  Einchecken-Tabellen-Daten werden geladen  ***");
 			br = new BufferedReader(new FileReader("tableData.txt"));
 			while ((line = br.readLine()) != null) {
 				System.out.println(line);
@@ -96,7 +97,6 @@ public class CheckinWindow {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -107,6 +107,7 @@ public class CheckinWindow {
 		BufferedReader stats_br = null;
 		String stats;
 		try {
+			System.out.println("*** Einchecken-Statistiken werden geladen  ***");
 			stats_br = new BufferedReader(new FileReader("statistics.txt"));
 			while ((stats = stats_br.readLine()) != null) {
 				System.out.println(stats);
@@ -125,6 +126,7 @@ public class CheckinWindow {
 		BufferedReader date_br = null;
 
 		try {
+			System.out.println("*** Einchecken-Datum wird geladen  ***");
 			date_br = new BufferedReader(new FileReader("date.txt"));
 			date_old = date_br.readLine();
 			System.out.println("Datum alt:\t" + date_old);
@@ -156,8 +158,7 @@ public class CheckinWindow {
 		 * System.out.println(s_newdate); System.out.println(date_old.length());
 		 **/
 		if (date_old.equalsIgnoreCase(s_newdate)) {
-			System.out
-					.println("Kein neues Datum, Variable bleibt 'G�ste/Tag'-Variable bleibt gleich!");
+			System.out.println("Kein neues Datum, Variable bleibt 'G�ste/Tag'-Variable bleibt gleich!");
 		} else {
 			
 			// Unten doppelt, falls man garnicht auf speichern klickt.

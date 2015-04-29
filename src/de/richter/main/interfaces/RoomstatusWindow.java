@@ -48,6 +48,7 @@ public class RoomstatusWindow {
 				try {
 					zeile = 0;
 					String line;
+					System.out.println("***  Zimmerstatus-Tabellen-Daten werden geladen  ***");
 					BufferedReader br = new BufferedReader(new FileReader("tableData.txt"));
 					while ((line = br.readLine()) != null) {
 						System.out.println(line);

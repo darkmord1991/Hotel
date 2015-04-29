@@ -76,6 +76,7 @@ public class CheckoutWindow {
 		String line;
 
 		try {
+			System.out.println("***  Auschecken-Tabllen-Daten werden geladen  ***");
 			br = new BufferedReader(new FileReader("tableData.txt"));
 			while ((line = br.readLine()) != null) {
 				System.out.println(line);
@@ -98,6 +99,7 @@ public class CheckoutWindow {
 		BufferedReader stats_br = null;
 		String stats;
 		try {
+			System.out.println("***  Auschecken-Statistiken werden geladen  ***");
 			stats_br = new BufferedReader(new FileReader("statistics.txt"));
 			while ((stats = stats_br.readLine()) != null) {
 				System.out.println(stats);

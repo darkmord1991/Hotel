@@ -47,6 +47,7 @@ public class StatisticsWindow {
 		BufferedReader stats_br = null;
 		String stats;
 		try {
+			System.out.println("***  Statistik-Fenster-Statistiken werden geladen  ***");
 			stats_br = new BufferedReader(new FileReader("statistics.txt"));
 			while ((stats = stats_br.readLine()) != null) {
 				System.out.println(stats);

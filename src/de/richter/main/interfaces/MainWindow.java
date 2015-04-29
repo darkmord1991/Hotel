@@ -69,7 +69,6 @@ public class MainWindow {
 				checkinWindow.getBtnClose().addActionListener(wl);
 				checkinWindow.getFrmEinchecken().setLocationRelativeTo(null);
 				checkinWindow.getFrmEinchecken().setVisible(true);
-				frmHotelprogramm.setVisible(false);
 			}
 		});
 		btnCheckin.setBounds(25, 23, 188, 63);
