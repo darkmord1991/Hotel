@@ -36,6 +36,19 @@ public class CheckinModel extends DefaultTableModel {
 		setValueAt(arg0, arg1, arg2);
 		super.addRow(new Object[11]);
 	}
+	
+	// Update-Methoden = Testmethoden für Refresh-Button
+	public void setUpdateLastValueAt(Object arg0, int arg1, int arg2) {
+		setValueAt(arg0, arg1, arg2);
+		super.addRow(new Object[11]);
+	}
+	public void setUpdateValueAt(Object arg0, int arg1, int arg2) {
+		// TODO Auto-generated method stub
+		super.setValueAt(arg0, arg1, arg2);
+		super.addRow(new Object[11]);
+
+	}
+
 
 	// public CheckinModel(int guestnumber, String name, String prename, String
 	// street, String number, int postcode, String city, String mail, int phone)

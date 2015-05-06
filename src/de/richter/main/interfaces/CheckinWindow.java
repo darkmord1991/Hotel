@@ -440,6 +440,39 @@ public class CheckinWindow {
 
 		});
 		frmEinchecken.getContentPane().add(btnSave);
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Tabelleninhalt (vorhanden) einf�gen
+				zeile = 0;
+				BufferedReader br = null;
+				String line;
+				try {
+					System.out.println("***  Einchecken-Tabellen-Daten werden geladen  ***");
+					br = new BufferedReader(new FileReader("tableData.txt"));
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+						// String aufsplitten
+						String[] arr = line.split(";");
+						for (int i = 0; i < arr.length; i++) {
+							if (i < (arr.length - 1)) {
+								getCheckinModel().setUpdateValueAt(arr[i], zeile, i);
+
+							} else {
+								getCheckinModel().setUpdateLastValueAt(arr[i], zeile, i);
+							}
+						}
+						zeile++;
+						System.out.println("\n Gesetzt in Zeile" + zeile + "\n");
+					}
+				} catch (IOException d) {
+					d.printStackTrace();
+				}
+			}
+		});
+		btnRefresh.setBounds(10, 155, 117, 29);
+		frmEinchecken.getContentPane().add(btnRefresh);
 		// Actions
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
