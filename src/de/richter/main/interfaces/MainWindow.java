@@ -73,7 +73,7 @@ public class MainWindow {
 	}
 
 	public void update() {
-
+		System.out.println("Update-Methode läuft durch.");
 		//Einchecken
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -117,7 +117,6 @@ public class MainWindow {
 		frmHotelprogramm.getContentPane().add(btnRoomstatus);
 		
 		//Statistiken
-
 		btnStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Statistiken");
@@ -130,6 +129,6 @@ public class MainWindow {
 		});
 		btnStatistics.setBounds(25, 249, 188, 51);
 		frmHotelprogramm.getContentPane().add(btnStatistics);
-		
+		System.out.println("Ende");
 	}
 }
