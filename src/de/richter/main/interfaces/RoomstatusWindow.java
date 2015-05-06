@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 
 public class RoomstatusWindow {
 	private int zeile, spalte;
@@ -43,8 +42,6 @@ public class RoomstatusWindow {
 	public RoomstatusWindow() {
 		initialize();
 		// Inhalt aus Datendatei in Tabelle lesen
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
 				try {
 					zeile = 0;
 					String line;
@@ -71,8 +68,6 @@ public class RoomstatusWindow {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-		});
 	}
 
 	/**
