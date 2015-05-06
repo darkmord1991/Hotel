@@ -72,16 +72,6 @@ public class CheckinWindow {
 	}
 
 	public CheckinWindow() {
-		//Table-Model getten
-		tableCheckin = new JTable();
-		// Vorsicht! �ndert immer wieder auf DefaultTableModel, muss auf
-		// CheckinModel ge�ndert werden
-		tableCheckin.setModel(new CheckinModel(new Object[][] { { null, null,
-				null, null, null, null, null, null, null, null, null, null,
-				null, null, null }, }, new String[] { "Gastnr.", "Zimmernr.",
-				"von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ",
-				"Stadt", "E-Mail", "Telefon", "Personen", "Pensionsart",
-				"Zimmerkategorie" }));
 		initialize();
 		// Tabelleninhalt (vorhanden) einf�gen
 		zeile = 0;
@@ -103,19 +93,27 @@ public class CheckinWindow {
 					}
 				}
 				zeile++;
-				System.out.println(getCheckinModel());
 				System.out.println("\n Gesetzt in Zeile" + zeile + "\n");
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//Table-Model getten
+		tableCheckin = new JTable();
+		// Vorsicht! �ndert immer wieder auf DefaultTableModel, muss auf
+		// CheckinModel ge�ndert werden
+		tableCheckin.setModel(new CheckinModel(new Object[][] { { null, null,
+				null, null, null, null, null, null, null, null, null, null,
+				null, null, null }, }, new String[] { "Gastnr.", "Zimmernr.",
+				"von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ",
+				"Stadt", "E-Mail", "Telefon", "Personen", "Pensionsart",
+				"Zimmerkategorie" }));
 		// Statistiken laden
 		BufferedReader stats_br = null;
 		String stats;

@@ -12,21 +12,6 @@ import de.richter.main.listener.WindowListener;
 public class MainWindow {
 
 	private JFrame frmHotelprogramm;
-	
-	JButton btnCheckin = new JButton("Einchecken");
-	JButton btnCheckout = new JButton("Auschecken");
-	JButton btnRoomstatus = new JButton("Zimmerstatus");
-	JButton btnStatistics = new JButton("Statistiken");
-	
-	CheckinWindow checkinWindow = new CheckinWindow();
-	CheckoutWindow checkoutWindow = new CheckoutWindow();
-	RoomstatusWindow roomstatusWindow = new RoomstatusWindow();
-	StatisticsWindow statisticsWindow = new StatisticsWindow();
-	
-	WindowListener wl;
-	WindowListener wl2;
-	WindowListener wl3;
-	WindowListener wl4;
 
 	/**
 	 * Launch the application.
@@ -62,19 +47,19 @@ public class MainWindow {
 		frmHotelprogramm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmHotelprogramm.getContentPane().setLayout(null);
 		
-		// WindowListener
-		wl = new WindowListener(frmHotelprogramm, checkinWindow.getFrmEinchecken(), this);
-		wl2 = new WindowListener(frmHotelprogramm, checkoutWindow.getFrmAuschecken(), this);
-		wl3 = new WindowListener(frmHotelprogramm, roomstatusWindow.getFrmRoomstatus(), this);
-		wl4 = new WindowListener(frmHotelprogramm, statisticsWindow.getFrmStatistics(), this);
-
-		update();
+		CheckinWindow checkinWindow = new CheckinWindow();
+		CheckoutWindow checkoutWindow = new CheckoutWindow();
+		RoomstatusWindow roomstatusWindow = new RoomstatusWindow();
+		StatisticsWindow statisticsWindow = new StatisticsWindow();
 		
-	}
-
-	public void update() {
-		System.out.println("Update-Methode läuft durch.");
+		// WindowListener
+		WindowListener wl = new WindowListener(frmHotelprogramm, checkinWindow.getFrmEinchecken(), this);
+		WindowListener wl2 = new WindowListener(frmHotelprogramm, checkoutWindow.getFrmAuschecken(), this);
+		WindowListener wl3 = new WindowListener(frmHotelprogramm, roomstatusWindow.getFrmRoomstatus(), this);
+		WindowListener wl4 = new WindowListener(frmHotelprogramm, statisticsWindow.getFrmStatistics(), this);
+		
 		//Einchecken
+		JButton btnCheckin = new JButton("Einchecken");
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Einchecken");
@@ -82,6 +67,7 @@ public class MainWindow {
 				checkinWindow.getFrmEinchecken().addWindowListener(wl);
 				checkinWindow.getBtnClose().addActionListener(wl);
 				checkinWindow.getFrmEinchecken().setLocationRelativeTo(null);
+				initialize();
 				checkinWindow.getFrmEinchecken().setVisible(true);
 			}
 		});
@@ -89,6 +75,7 @@ public class MainWindow {
 		frmHotelprogramm.getContentPane().add(btnCheckin);
 		
 		//Auschecken
+		JButton btnCheckout = new JButton("Auschecken");
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Auschecken");
@@ -103,6 +90,7 @@ public class MainWindow {
 		frmHotelprogramm.getContentPane().add(btnCheckout);
 		
 		//Zimmerstatus
+		JButton btnRoomstatus = new JButton("Zimmerstatus");
 		btnRoomstatus.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Zimmerstatus");
@@ -117,6 +105,7 @@ public class MainWindow {
 		frmHotelprogramm.getContentPane().add(btnRoomstatus);
 		
 		//Statistiken
+		JButton btnStatistics = new JButton("Statistiken");
 		btnStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Statistiken");
@@ -129,6 +118,5 @@ public class MainWindow {
 		});
 		btnStatistics.setBounds(25, 249, 188, 51);
 		frmHotelprogramm.getContentPane().add(btnStatistics);
-		System.out.println("Ende");
 	}
 }

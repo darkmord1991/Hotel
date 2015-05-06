@@ -45,7 +45,7 @@ public class WindowListener implements java.awt.event.WindowListener, ActionList
 	private void close() {
 		close.dispose();
 		parent.setVisible(true);
-		mainWindow.update();
+		mainWindow.initialize();
 		System.out.println("*** Windows-Listener switcht jetzt die Fenster ***");
 		
 	}
