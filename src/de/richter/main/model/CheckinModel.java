@@ -45,6 +45,7 @@ public class CheckinModel extends DefaultTableModel {
 	
 	public void removeAllRows() {
     	System.out.println("Rowcount:\t" + this.getRowCount());
+    	System.out.println(this);
         if ((this.getRowCount()-1) > 0) {
         	System.out.println("\nJetzt wird der Tabelleninhalt gelöscht\n");
 	    for( int i = this.getRowCount()-1; i >= 0; i-- ) {
