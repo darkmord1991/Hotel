@@ -398,15 +398,11 @@ public class CheckinWindow {
 		btnSave.setBounds(10, 262, 110, 31);
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				System.out.println("Col: " + tableCheckin.getColumnCount());
 				// Tabelleninhalt wird exportiert
 				BufferedWriter bfw;
 				try {
 					bfw = new BufferedWriter(new FileWriter("tableData.txt"));
-					// Spaltennamen auch in Datei schreiben (Falls n�tig)
-					// for (int i = 0; i < tableCheckin.getColumnCount(); i++) {
-					// bfw.write(tableCheckin.getColumnName(i));
-					// bfw.write("\t");
-					// }
 					for (int i = 0; i < tableCheckin.getRowCount() - 1; i++) {
 						for (int j = 0; j < tableCheckin.getColumnCount(); j++) {
 							System.out.println(j);
