@@ -34,6 +34,7 @@ public class CheckoutWindow {
 	private JFrame frmAuschecken;
 	private JTextField textFieldName;
 	private JTextField textFieldPrename;
+	JComboBox<String> comboBoxGuestnumber = new JComboBox<>();
 	
 	//Variablen
 	@SuppressWarnings("unused")
@@ -66,8 +67,8 @@ public class CheckoutWindow {
 	 * @throws IOException 
 	 */
 	public CheckoutWindow() {
-		updateLists();
 		initialize();
+		updateLists();
 	}
 
 	public void updateLists() {
@@ -118,6 +119,10 @@ public class CheckoutWindow {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				comboBoxGuestnumber.setModel(new DefaultComboBoxModel<>(new String[] {"Bitte ausw\u00E4hlen"}));
+				for (String item : boxitems) {
+					comboBoxGuestnumber.addItem(item);
+				}
 	}
 
 	private void initialize() {		
@@ -127,12 +132,8 @@ public class CheckoutWindow {
 //		frmAuschecken.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); Wegen WindowListener nicht n�tig
 		frmAuschecken.getContentPane().setLayout(null);
 
-		JComboBox<String> comboBoxGuestnumber = new JComboBox<>();
-		comboBoxGuestnumber.setModel(new DefaultComboBoxModel<>(new String[] {"Bitte ausw\u00E4hlen"}));
 //		for (int i=0; i < boxitems.size(); i++) {
-		for (String item : boxitems) {
-			comboBoxGuestnumber.addItem(item);
-		}
+
 		comboBoxGuestnumber.setBounds(25, 72, 116, 20);
 		CheckoutListener cl = new CheckoutListener(boxitems, prename, lastname, this);
 		comboBoxGuestnumber.addItemListener(cl);
