@@ -73,31 +73,42 @@ public class CheckinWindow {
 
 	public CheckinWindow() {
 		initialize();
-		// Tabelleninhalt (vorhanden) einf�gen
-		zeile = 0;
-		BufferedReader br = null;
-		String line;
-		try {
-			System.out.println("***  Einchecken-Tabellen-Daten werden geladen  ***");
-			br = new BufferedReader(new FileReader("tableData.txt"));
-			while ((line = br.readLine()) != null) {
-				System.out.println(line);
-				// String aufsplitten
-				String[] arr = line.split(";");
-				for (int i = 0; i < arr.length; i++) {
-					if (i < (arr.length - 1)) {
-						getCheckinModel().setValueAt(arr[i], zeile, i);
+		updateTable();
+	}
 
-					} else {
-						getCheckinModel().setLastValueAt(arr[i], zeile, i);
-					}
-				}
-				zeile++;
-				System.out.println("\n Gesetzt in Zeile" + zeile + "\n");
+	public void updateTable() {
+		System.out.println("Row: " + tableCheckin.getRowCount());
+		System.out.println("Col: " + tableCheckin.getColumnCount());
+		for (int row = 0; row < tableCheckin.getRowCount(); row++) {
+			for (int col = 0; col < tableCheckin.getColumnCount(); col++) {
+				getCheckinModel().setValueAt(null, row, col);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
+		// Tabelleninhalt (vorhanden) einf�gen
+				zeile = 0;
+				BufferedReader br = null;
+				String line;
+				try {
+					System.out.println("***  Einchecken-Tabellen-Daten werden geladen  ***");
+					br = new BufferedReader(new FileReader("tableData.txt"));
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+						// String aufsplitten
+						String[] arr = line.split(";");
+						for (int i = 0; i < arr.length; i++) {
+							if (i < (arr.length - 1)) {
+								getCheckinModel().setValueAt(arr[i], zeile, i);
+
+							} else {
+								getCheckinModel().setLastValueAt(arr[i], zeile, i);
+							}
+						}
+						zeile++;
+						System.out.println("\n Gesetzt in Zeile" + zeile + "\n");
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 	}
 
 	/**
@@ -369,8 +380,7 @@ public class CheckinWindow {
 		btnClose.setBounds(10, 308, 110, 31);
 		btnClose.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Tabelle zurücksetzen
-				getCheckinModel().removeAllRows();
+				
 			}
 		});
 		frmEinchecken.getContentPane().add(btnClose);

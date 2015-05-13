@@ -41,33 +41,43 @@ public class RoomstatusWindow {
 	 */
 	public RoomstatusWindow() {
 		initialize();
-		// Inhalt aus Datendatei in Tabelle lesen
-				try {
-					zeile = 0;
-					String line;
-					System.out.println("***  Zimmerstatus-Tabellen-Daten werden geladen  ***");
-					BufferedReader br = new BufferedReader(new FileReader("tableData.txt"));
-					while ((line = br.readLine()) != null) {
-						System.out.println(line);
-						// String aufsplitten
-						String[] arr = line.split(";");
-						spalte = 0;
-						getRoomstatusModel()
-								.setValueAt(arr[1], zeile, spalte++);
-						getRoomstatusModel().setValueAt(arr[13], zeile,
-								spalte++);
-						getRoomstatusModel().setValueAt(arr[12], zeile,
-								spalte++);
-						getRoomstatusModel()
-								.setValueAt(arr[0], zeile, spalte++);
-						getRoomstatusModel()
-								.setLastValueAt(arr[3], zeile, spalte++);
-						zeile++;
-					}
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		updateTable();
+	}
+
+	public void updateTable() {
+		// Tabelle überschreiben
+		System.out.println("***  Roomstatus-Tabellen-Daten werden aktualisiert  ***");
+		zeile = 0;
+		System.out.println("Row: " + tableRoom.getRowCount());
+		System.out.println("Col: " + tableRoom.getColumnCount());
+		for (int row = 0; row < tableRoom.getRowCount(); row++) {
+			for (int col = 0; col < tableRoom.getColumnCount(); col++) {
+				getRoomstatusModel().setValueAt(null, row, col);
+			}
+		}
+		// Tabelleninhalt (vorhanden) einf�gen
+		zeile = 0;
+		String line;
+		try {
+			zeile = 0;
+			System.out.println("***  Zimmerstatus-Tabellen-Daten werden geladen  ***");
+			BufferedReader br = new BufferedReader(new FileReader("tableData.txt"));
+			while ((line = br.readLine()) != null) {
+				System.out.println(line);
+				// String aufsplitten
+				String[] arr = line.split(";");
+				spalte = 0;
+				getRoomstatusModel().setValueAt(arr[1], zeile, spalte++);
+				getRoomstatusModel().setValueAt(arr[13], zeile, spalte++);
+				getRoomstatusModel().setValueAt(arr[12], zeile, spalte++);
+				getRoomstatusModel().setValueAt(arr[0], zeile, spalte++);
+				getRoomstatusModel().setLastValueAt(arr[3], zeile, spalte++);
+				zeile++;
+			}
+			br.close();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
 	}
 
 	/**
@@ -102,8 +112,49 @@ public class RoomstatusWindow {
 				frmRoomstatus.setVisible(false);
 			}
 		});
-		btnClose.setBounds(149, 230, 134, 23);
+		btnClose.setBounds(300, 231, 134, 23);
 		frmRoomstatus.getContentPane().add(btnClose);
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Tabelle überschreiben
+				System.out.println("***  Roomstatus-Tabellen-Daten werden aktualisiert  ***");
+				zeile = 0;
+				System.out.println("Row: " + tableRoom.getRowCount());
+				System.out.println("Col: " + tableRoom.getColumnCount());
+				for (int row = 0; row < tableRoom.getRowCount(); row++) {
+					for (int col = 0; col < tableRoom.getColumnCount(); col++) {
+						getRoomstatusModel().setValueAt(null, row, col);
+					}
+				}
+				// Tabelleninhalt (vorhanden) einf�gen
+				zeile = 0;
+				String line;
+				try {
+					zeile = 0;
+					System.out.println("***  Zimmerstatus-Tabellen-Daten werden geladen  ***");
+					BufferedReader br = new BufferedReader(new FileReader("tableData.txt"));
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+						// String aufsplitten
+						String[] arr = line.split(";");
+						spalte = 0;
+						getRoomstatusModel().setValueAt(arr[1], zeile, spalte++);
+						getRoomstatusModel().setValueAt(arr[13], zeile, spalte++);
+						getRoomstatusModel().setValueAt(arr[12], zeile, spalte++);
+						getRoomstatusModel().setValueAt(arr[0], zeile, spalte++);
+						getRoomstatusModel().setLastValueAt(arr[3], zeile, spalte++);
+						zeile++;
+					}
+					br.close();
+				} catch (IOException e2) {
+					e2.printStackTrace();
+				}
+			}
+		});
+		btnRefresh.setBounds(50, 231, 117, 29);
+		frmRoomstatus.getContentPane().add(btnRefresh);
 	}
 
 	/**
@@ -131,6 +182,4 @@ public class RoomstatusWindow {
 	public void setBtnClose(JButton btnClose) {
 		this.btnClose = btnClose;
 	}
-
-
 }

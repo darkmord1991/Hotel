@@ -67,6 +67,7 @@ public class MainWindow {
 				checkinWindow.getFrmEinchecken().addWindowListener(wl);
 				checkinWindow.getBtnClose().addActionListener(wl);
 				checkinWindow.getFrmEinchecken().setLocationRelativeTo(null);
+				checkinWindow.updateTable();
 				checkinWindow.getFrmEinchecken().setVisible(true);
 			}
 		});
@@ -96,6 +97,7 @@ public class MainWindow {
 				roomstatusWindow.getFrmRoomstatus().addWindowListener(wl3);
 				roomstatusWindow.getBtnClose().addActionListener(wl3);
 				frmHotelprogramm.setVisible(false);
+				roomstatusWindow.updateTable();
 				roomstatusWindow.getFrmRoomstatus().setLocationRelativeTo(null);
 				roomstatusWindow.getFrmRoomstatus().setVisible(true);
 			}
