@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StatisticsWindow {
 	private String came;
@@ -17,6 +19,10 @@ public class StatisticsWindow {
 
 	private JFrame frmStatistics;
 	private JButton btnClose;
+	
+	JLabel lblGuestNow = new JLabel("");
+	JLabel lblGuestThere = new JLabel("");
+	JLabel lblGuestGone = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -36,20 +42,18 @@ public class StatisticsWindow {
 	}
 
 	public StatisticsWindow() {
+		updateStats();
 		initialize();
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
+	public void updateStats() {
 		// Statistiken laden
 		BufferedReader stats_br = null;
 		String stats;
 		try {
 			System.out.println("***  Statistik-Fenster-Statistiken werden geladen  ***");
 			stats_br = new BufferedReader(new FileReader("statistics.txt"));
-			while ((stats = stats_br.readLine()) != null) {
+			while ((stats = stats_br.readLine()) != null && !stats.isEmpty()) {
 				System.out.println(stats);
 				String[] arr = stats.split(";");
 				came = arr[0];
@@ -60,7 +64,15 @@ public class StatisticsWindow {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-					
+		lblGuestNow.setText(came);
+		lblGuestThere.setText(there);
+		lblGuestGone.setText(away);
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {					
 		frmStatistics = new JFrame();
 		frmStatistics.setBounds(100, 100, 280, 210);
 		frmStatistics.setTitle("Statistiken");
@@ -80,23 +92,26 @@ public class StatisticsWindow {
 		frmStatistics.getContentPane().add(lblGuestaway);
 		
 		btnClose = new JButton("Schlie\u00DFen");
-		btnClose.setBounds(83, 131, 95, 29);
+		btnClose.setBounds(179, 130, 95, 29);
 		frmStatistics.getContentPane().add(btnClose);
 		
-		JLabel lblGuestNow = new JLabel("");
 		lblGuestNow.setBounds(142, 31, 46, 14);
-		lblGuestNow.setText(came);
 		frmStatistics.getContentPane().add(lblGuestNow);
 		
-		JLabel lblGuestThere = new JLabel("");
 		lblGuestThere.setBounds(142, 62, 46, 14);
-		lblGuestThere.setText(there);
 		frmStatistics.getContentPane().add(lblGuestThere);
 		
-		JLabel lblGuestGone = new JLabel("");
 		lblGuestGone.setBounds(142, 90, 46, 14);
-		lblGuestGone.setText(away);
 		frmStatistics.getContentPane().add(lblGuestGone);
+		
+		JButton btnRefresh = new JButton("Aktualisieren");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateStats();
+			}
+		});
+		btnRefresh.setBounds(30, 130, 117, 29);
+		frmStatistics.getContentPane().add(btnRefresh);
 	}
 
 	public JFrame getFrmStatistics() {

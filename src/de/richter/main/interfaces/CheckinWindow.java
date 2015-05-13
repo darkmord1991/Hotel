@@ -89,10 +89,9 @@ public class CheckinWindow {
 				BufferedReader br = null;
 				String line;
 				try {
-					System.out.println("***  Einchecken-Tabellen-Daten werden geladen  ***");
+					System.out.println("***  Einchecken-Tabellen-Daten werden geladen/aktualisiert  ***");
 					br = new BufferedReader(new FileReader("tableData.txt"));
 					while ((line = br.readLine()) != null && !line.isEmpty()) {
-						System.out.println(line);
 						// String aufsplitten
 						String[] arr = line.split(";");
 						for (int i = 0; i < arr.length; i++) {
@@ -103,7 +102,7 @@ public class CheckinWindow {
 								getCheckinModel().setLastValueAt(arr[i], zeile, i);
 							}
 						}
-						System.out.println("\n Gesetzt in Zeile" + zeile + "\n");
+						System.out.println("\n Gesetzt in Zeile " + zeile + ":\t" + line);
 						zeile++;
 					}
 				} catch (IOException e) {
@@ -452,44 +451,10 @@ public class CheckinWindow {
 		JButton btnRefresh = new JButton("Aktualisieren");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Tabelle überschreiben
-				zeile = 0;
-				System.out.println("Row: " + tableCheckin.getRowCount());
-				System.out.println("Col: " + tableCheckin.getColumnCount());
-				for (int row = 0; row < tableCheckin.getRowCount(); row++) {
-					for (int col = 0; col < tableCheckin.getColumnCount(); col++) {
-						getCheckinModel().setValueAt(null, row, col);
-					}
-				}
-				// Tabelleninhalt (vorhanden) einf�gen
-				zeile = 0;
-				BufferedReader br = null;
-				String line;
-				try {
-					System.out.println("***  Einchecken-Tabellen-Daten werden geladen  ***");
-					br = new BufferedReader(new FileReader("tableData.txt"));
-					while ((line = br.readLine()) != null && !line.isEmpty()) {
-						System.out.println(line);
-						// String aufsplitten
-						String[] arr = line.split(";");
-						for (int i = 0; i < arr.length; i++) {
-							if (i < (arr.length - 1)) {
-								getCheckinModel().setValueAt(arr[i], zeile, i);
-
-							} else {
-								getCheckinModel().setLastValueAt(arr[i], zeile, i);
-							}
-						}
-						zeile++;
-						System.out.println("\n Gesetzt in Zeile" + zeile + "\n");
-					}
-				} catch (IOException d) {
-					d.printStackTrace();
-				}
+				updateTable();
 			}
 		});
 		btnRefresh.setBounds(10, 155, 110, 29);
-		btnRefresh.doClick();
 		frmEinchecken.getContentPane().add(btnRefresh);
 		// Actions
 		btnCheckin.addActionListener(new ActionListener() {

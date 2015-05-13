@@ -223,7 +223,7 @@ public class CheckoutWindow {
 		btnClose.setBounds(295, 114, 104, 36);
 		frmAuschecken.getContentPane().add(btnClose);
 		
-		JButton btnRefresh = new JButton("Refresh");
+		JButton btnRefresh = new JButton("Aktualisieren");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateLists();

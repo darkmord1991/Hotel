@@ -79,9 +79,9 @@ public class MainWindow {
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Auschecken");
+				frmHotelprogramm.setVisible(false);
 				checkoutWindow.getFrmAuschecken().addWindowListener(wl2);
 				checkoutWindow.getBtnClose().addActionListener(wl2);
-				frmHotelprogramm.setVisible(false);
 				checkoutWindow.updateLists();
 				checkoutWindow.getFrmAuschecken().setLocationRelativeTo(null);
 				checkoutWindow.getFrmAuschecken().setVisible(true);
@@ -95,9 +95,9 @@ public class MainWindow {
 		btnRoomstatus.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Zimmerstatus");
+				frmHotelprogramm.setVisible(false);
 				roomstatusWindow.getFrmRoomstatus().addWindowListener(wl3);
 				roomstatusWindow.getBtnClose().addActionListener(wl3);
-				frmHotelprogramm.setVisible(false);
 				roomstatusWindow.updateTable();
 				roomstatusWindow.getFrmRoomstatus().setLocationRelativeTo(null);
 				roomstatusWindow.getFrmRoomstatus().setVisible(true);
@@ -111,9 +111,10 @@ public class MainWindow {
 		btnStatistics.addActionListener(new ActionListener() {
 			public void actionPerformed (ActionEvent arg0) {
 				System.out.println("Statistiken");
+				frmHotelprogramm.setVisible(false);
 				statisticsWindow.getFrmStatistics().addWindowListener(wl4);
 				statisticsWindow.getBtnClose().addActionListener(wl4);
-				frmHotelprogramm.setVisible(false);
+				statisticsWindow.updateStats();
 				statisticsWindow.getFrmStatistics().setLocationRelativeTo(null);
 				statisticsWindow.getFrmStatistics().setVisible(true);
 			}
