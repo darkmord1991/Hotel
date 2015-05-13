@@ -220,6 +220,15 @@ public class CheckoutWindow {
 		btnClose = new JButton("Schlie\u00DFen");
 		btnClose.setBounds(295, 114, 104, 36);
 		frmAuschecken.getContentPane().add(btnClose);
+		
+		JButton btnRefresh = new JButton("Refresh");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateLists();
+			}
+		});
+		btnRefresh.setBounds(327, 14, 117, 29);
+		frmAuschecken.getContentPane().add(btnRefresh);
 	}
 	
 	public JButton getBtnClose() {
