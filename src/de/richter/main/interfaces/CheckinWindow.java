@@ -444,6 +444,15 @@ public class CheckinWindow {
 		JButton btnRefresh = new JButton("Refresh");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Tabelle überschreiben
+				zeile = 0;
+				System.out.println("Row: " + tableCheckin.getRowCount());
+				System.out.println("Col: " + tableCheckin.getColumnCount());
+				for (int row = 0; row < tableCheckin.getRowCount(); row++) {
+					for (int col = 0; col < tableCheckin.getColumnCount(); col++) {
+						getCheckinModel().setValueAt(null, row, col);
+					}
+				}
 				// Tabelleninhalt (vorhanden) einf�gen
 				zeile = 0;
 				BufferedReader br = null;
@@ -457,10 +466,10 @@ public class CheckinWindow {
 						String[] arr = line.split(";");
 						for (int i = 0; i < arr.length; i++) {
 							if (i < (arr.length - 1)) {
-								getCheckinModel().setUpdateValueAt(arr[i], zeile, i);
+								getCheckinModel().setValueAt(arr[i], zeile, i);
 
 							} else {
-								getCheckinModel().setUpdateLastValueAt(arr[i], zeile, i);
+								getCheckinModel().setLastValueAt(arr[i], zeile, i);
 							}
 						}
 						zeile++;
@@ -472,6 +481,7 @@ public class CheckinWindow {
 			}
 		});
 		btnRefresh.setBounds(10, 155, 117, 29);
+		btnRefresh.doClick();
 		frmEinchecken.getContentPane().add(btnRefresh);
 		// Actions
 		btnCheckin.addActionListener(new ActionListener() {

@@ -34,18 +34,18 @@ public class CheckinModel extends DefaultTableModel {
 	// Hier wird der Werte gesetzt und eine neue Zeile wird hinzugef�gt
 	public void setLastValueAt(Object arg0, int arg1, int arg2) {
 		setValueAt(arg0, arg1, arg2);
-		super.addRow(new Object[11]);
+		super.addRow(new Object[15]);
 	}
 	
 	// Update-Methoden = Testmethoden für Refresh-Button
 	public void setUpdateLastValueAt(Object arg0, int arg1, int arg2) {
 		setValueAt(arg0, arg1, arg2);
-		super.addRow(new Object[11]);
+
 	}
 	public void setUpdateValueAt(Object arg0, int arg1, int arg2) {
 		// TODO Auto-generated method stub
 		super.setValueAt(arg0, arg1, arg2);
-		super.addRow(new Object[11]);
+		super.addRow(new Object[15]);
 
 	}
 
