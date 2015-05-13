@@ -62,7 +62,7 @@ public class RoomstatusWindow {
 			zeile = 0;
 			System.out.println("***  Zimmerstatus-Tabellen-Daten werden geladen  ***");
 			BufferedReader br = new BufferedReader(new FileReader("tableData.txt"));
-			while ((line = br.readLine()) != null) {
+			while ((line = br.readLine()) != null && !line.isEmpty()) {
 				System.out.println(line);
 				// String aufsplitten
 				String[] arr = line.split(";");
@@ -135,7 +135,7 @@ public class RoomstatusWindow {
 					zeile = 0;
 					System.out.println("***  Zimmerstatus-Tabellen-Daten werden geladen  ***");
 					BufferedReader br = new BufferedReader(new FileReader("tableData.txt"));
-					while ((line = br.readLine()) != null) {
+					while ((line = br.readLine()) != null && !line.isEmpty()) {
 						System.out.println(line);
 						// String aufsplitten
 						String[] arr = line.split(";");

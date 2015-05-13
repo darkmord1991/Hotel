@@ -91,7 +91,7 @@ public class CheckinWindow {
 				try {
 					System.out.println("***  Einchecken-Tabellen-Daten werden geladen  ***");
 					br = new BufferedReader(new FileReader("tableData.txt"));
-					while ((line = br.readLine()) != null) {
+					while ((line = br.readLine()) != null && !line.isEmpty()) {
 						System.out.println(line);
 						// String aufsplitten
 						String[] arr = line.split(";");
@@ -103,8 +103,8 @@ public class CheckinWindow {
 								getCheckinModel().setLastValueAt(arr[i], zeile, i);
 							}
 						}
-						zeile++;
 						System.out.println("\n Gesetzt in Zeile" + zeile + "\n");
+						zeile++;
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -408,9 +408,11 @@ public class CheckinWindow {
 							System.out.println(j);
 							// System.out.println(tableCheckin.getValueAt(i,
 							// j));
-							bfw.write((String) (tableCheckin.getValueAt(i, j)));
-							if (j < (tableCheckin.getColumnCount() - 1)) {
-								bfw.write(";");
+							if (tableCheckin.getValueAt(i, j) != null) {
+								bfw.write((String) (tableCheckin.getValueAt(i, j)));
+								if (j < (tableCheckin.getColumnCount() - 1)) {
+									bfw.write(";");
+								}
 							}
 						}
 						bfw.newLine();
@@ -466,7 +468,7 @@ public class CheckinWindow {
 				try {
 					System.out.println("***  Einchecken-Tabellen-Daten werden geladen  ***");
 					br = new BufferedReader(new FileReader("tableData.txt"));
-					while ((line = br.readLine()) != null) {
+					while ((line = br.readLine()) != null && !line.isEmpty()) {
 						System.out.println(line);
 						// String aufsplitten
 						String[] arr = line.split(";");

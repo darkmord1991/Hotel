@@ -84,7 +84,7 @@ public class CheckoutWindow {
 				try {
 					System.out.println("***  Auschecken-Tabllen-Daten werden geladen  ***");
 					br = new BufferedReader(new FileReader("tableData.txt"));
-					while ((line = br.readLine()) != null) {
+					while ((line = br.readLine()) != null && !line.isEmpty()) {
 						System.out.println(line);
 						// String aufsplitten
 						String[] arr = line.split(";");
@@ -93,8 +93,10 @@ public class CheckoutWindow {
 						// Als n�chste die Index der Gastnummer bekommen, aus der
 						// Table-liste l�schen und Datei neu abspeichern!
 						boxitems.add(arr[0]);
+						if (arr[4] != null && arr[5] != null) {
 						lastname.add(arr[4]);
 						prename.add(arr[5]);
+						}
 						zeile++;
 					}
 				} catch (IOException e) {
