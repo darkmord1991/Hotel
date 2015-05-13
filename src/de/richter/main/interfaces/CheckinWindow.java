@@ -449,7 +449,7 @@ public class CheckinWindow {
 		});
 		frmEinchecken.getContentPane().add(btnSave);
 		
-		JButton btnRefresh = new JButton("Refresh");
+		JButton btnRefresh = new JButton("Aktualisieren");
 		btnRefresh.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Tabelle überschreiben
@@ -488,7 +488,7 @@ public class CheckinWindow {
 				}
 			}
 		});
-		btnRefresh.setBounds(10, 155, 117, 29);
+		btnRefresh.setBounds(10, 155, 110, 29);
 		btnRefresh.doClick();
 		frmEinchecken.getContentPane().add(btnRefresh);
 		// Actions

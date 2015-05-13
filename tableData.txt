@@ -2,19 +2,3 @@
 2;2;25.05.14;26.05.14;Marius;Müller;Hw;16;56281;Emmelshausen;lukas_mueller@outlook.de;06747;Zimmer;Zimmer;Zimmer
 3;3;13.05.15;15.05.15;Schulz;Florian;ka;13;34563;Nassau;ka@ka.de;5678;5;Vollpension;Suite
 4;4;14.05.15;16.05.15;fhgjk;ghvbjnk;fhgjknlm;81;43342;hgbfvdy;byvc;rqew;1;Bed and Breakfast;Business
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
