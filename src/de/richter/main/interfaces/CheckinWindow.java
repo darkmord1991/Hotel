@@ -514,6 +514,7 @@ public class CheckinWindow {
 				// Gesamtstatistik erh�hen
 				came = came + 1;
 				System.out.println("T�gliche G�ste-Variable wurde erh�ht!");
+				btnSave.doClick();
 			}
 		});
 

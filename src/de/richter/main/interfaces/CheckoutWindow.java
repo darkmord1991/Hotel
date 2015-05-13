@@ -213,7 +213,7 @@ public class CheckoutWindow {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
+				updateLists();
 			}
 			
 		});
