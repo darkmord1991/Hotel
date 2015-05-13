@@ -82,6 +82,7 @@ public class MainWindow {
 				checkoutWindow.getFrmAuschecken().addWindowListener(wl2);
 				checkoutWindow.getBtnClose().addActionListener(wl2);
 				frmHotelprogramm.setVisible(false);
+				checkoutWindow.updateLists();
 				checkoutWindow.getFrmAuschecken().setLocationRelativeTo(null);
 				checkoutWindow.getFrmAuschecken().setVisible(true);
 			}

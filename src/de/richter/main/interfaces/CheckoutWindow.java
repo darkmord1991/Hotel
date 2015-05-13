@@ -66,54 +66,61 @@ public class CheckoutWindow {
 	 * @throws IOException 
 	 */
 	public CheckoutWindow() {
+		updateLists();
 		initialize();
 	}
 
-	private void initialize() {
+	public void updateLists() {
+		// Listen clearen
+		boxitems.clear();
+		lastname.clear();
+		prename.clear();
+		table.clear();
 		// L�schdaten einlesen
-		zeile = 0;
-		BufferedReader br = null;
-		String line;
+				zeile = 0;
+				BufferedReader br = null;
+				String line;
+				try {
+					System.out.println("***  Auschecken-Tabllen-Daten werden geladen  ***");
+					br = new BufferedReader(new FileReader("tableData.txt"));
+					while ((line = br.readLine()) != null) {
+						System.out.println(line);
+						// String aufsplitten
+						String[] arr = line.split(";");
+						// Tabelleninhalt wird in Liste gespeichert
+						table.add(line);
+						// Als n�chste die Index der Gastnummer bekommen, aus der
+						// Table-liste l�schen und Datei neu abspeichern!
+						boxitems.add(arr[0]);
+						lastname.add(arr[4]);
+						prename.add(arr[5]);
+						zeile++;
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}	
+				
+				// Statistiken laden
+				BufferedReader stats_br = null;
+				String stats;
+				try {
+					System.out.println("***  Auschecken-Statistiken werden geladen  ***");
+					stats_br = new BufferedReader(new FileReader("statistics.txt"));
+					while ((stats = stats_br.readLine()) != null) {
+						System.out.println(stats);
+						String[] arr = stats.split(";");
+						came = Integer.parseInt(arr[0]);
+						there = Integer.parseInt(arr[1]);
+						away = Integer.parseInt(arr[2]);
+					}
 
-		try {
-			System.out.println("***  Auschecken-Tabllen-Daten werden geladen  ***");
-			br = new BufferedReader(new FileReader("tableData.txt"));
-			while ((line = br.readLine()) != null) {
-				System.out.println(line);
-				// String aufsplitten
-				String[] arr = line.split(";");
-				// Tabelleninhalt wird in Liste gespeichert
-				table.add(line);
-				// Als n�chste die Index der Gastnummer bekommen, aus der
-				// Table-liste l�schen und Datei neu abspeichern!
-				boxitems.add(arr[0]);
-				lastname.add(arr[4]);
-				prename.add(arr[5]);
-				zeile++;
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	}
 
-		// Statistiken laden
-		BufferedReader stats_br = null;
-		String stats;
-		try {
-			System.out.println("***  Auschecken-Statistiken werden geladen  ***");
-			stats_br = new BufferedReader(new FileReader("statistics.txt"));
-			while ((stats = stats_br.readLine()) != null) {
-				System.out.println(stats);
-				String[] arr = stats.split(";");
-				came = Integer.parseInt(arr[0]);
-				there = Integer.parseInt(arr[1]);
-				away = Integer.parseInt(arr[2]);
-			}
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	private void initialize() {		
 		frmAuschecken = new JFrame();
 		frmAuschecken.setTitle("Auschecken");
 		frmAuschecken.setBounds(100, 100, 450, 200);
