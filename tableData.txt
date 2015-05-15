@@ -1,1 +1,1 @@
-2;2;10.05.15;20.05.15;Nachname;Vorname;Straße;18;12345;Stadt;mail@mail.de;123456;1;Bed and Breakfast;Business
+1;1;15.05.2015;20.05.2015;PreName;LastName;Street;16;12345;City;mail@mail.de;123456789;1;Vollpension;Suite

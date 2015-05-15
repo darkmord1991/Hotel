@@ -28,6 +28,7 @@ import javax.swing.DefaultComboBoxModel;
 public class CheckinWindow {
 	// Globale Variablen
 	private int zeile;
+	private boolean updateStats;
 
 	// Datumsvariable
 	private String date_old;
@@ -72,8 +73,18 @@ public class CheckinWindow {
 	}
 
 	public CheckinWindow() {
-		initialize();
+		//Table-Model getten
+		tableCheckin = new JTable();
+		// Vorsicht! �ndert immer wieder auf DefaultTableModel, muss auf
+		// CheckinModel ge�ndert werden
+		tableCheckin.setModel(new CheckinModel(new Object[][] { { null, null,
+				null, null, null, null, null, null, null, null, null, null,
+				null, null, null }, }, new String[] { "Gastnr.", "Zimmernr.",
+				"von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ",
+				"Stadt", "E-Mail", "Telefon", "Personen", "Pensionsart",
+				"Zimmerkategorie" }));
 		updateTable();
+		initialize();
 	}
 
 	public void updateTable() {
@@ -114,16 +125,6 @@ public class CheckinWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//Table-Model getten
-		tableCheckin = new JTable();
-		// Vorsicht! �ndert immer wieder auf DefaultTableModel, muss auf
-		// CheckinModel ge�ndert werden
-		tableCheckin.setModel(new CheckinModel(new Object[][] { { null, null,
-				null, null, null, null, null, null, null, null, null, null,
-				null, null, null }, }, new String[] { "Gastnr.", "Zimmernr.",
-				"von", "bis", "Name", "Vorname", "Strasse", "Hausnr.", "PLZ",
-				"Stadt", "E-Mail", "Telefon", "Personen", "Pensionsart",
-				"Zimmerkategorie" }));
 		// Statistiken laden
 		BufferedReader stats_br = null;
 		String stats;
@@ -173,7 +174,6 @@ public class CheckinWindow {
 		}
 
 		// Statistikvariable auf 0 setzen, wenn neues Datum erkannt wird.
-		// Frage: Wieso erkennt er nicht, dass das Datum gleich ist?
 		/**
 		 * System.out.println(date_old); System.out.println(date_old.length());
 		 * System.out.println(s_newdate); System.out.println(date_old.length());
@@ -404,7 +404,7 @@ public class CheckinWindow {
 					bfw = new BufferedWriter(new FileWriter("tableData.txt"));
 					for (int i = 0; i < tableCheckin.getRowCount() - 1; i++) {
 						for (int j = 0; j < tableCheckin.getColumnCount(); j++) {
-							System.out.println(j);
+//							System.out.println(j);
 							// System.out.println(tableCheckin.getValueAt(i,
 							// j));
 							if (tableCheckin.getValueAt(i, j) != null) {
@@ -417,16 +417,21 @@ public class CheckinWindow {
 						bfw.newLine();
 					}
 					bfw.close();
-					System.out.println("Daten gespeichert!");
+					if (updateStats == true) {
+						System.out.println("Daten gespeichert!");
+					}
 				} catch (IOException e) {
 					// TODO Auto-generated ceatch block
 					e.printStackTrace();
 				}
-
-				// Statistikexport
-				there = tableCheckin.getRowCount() - 1; // -1 wegen der letzten
-														// leeren Zeile in der
-														// Tabelle!
+				if (updateStats == false) {
+					there = tableCheckin.getRowCount() - 1; 
+					System.out.println("Gäste (There-Statistik wird überschrieben:\t" + there);
+					/** -1 wegen der letzten
+					 leeren Zeile in der
+					 Tabelle! **/
+				}
+				
 				String came, there, away;
 				came = "" + CheckinWindow.this.came;
 				there = "" + CheckinWindow.this.there;
@@ -446,6 +451,7 @@ public class CheckinWindow {
 			}
 
 		});
+		btnSave.doClick();
 		frmEinchecken.getContentPane().add(btnSave);
 		
 		JButton btnRefresh = new JButton("Aktualisieren");
@@ -514,6 +520,7 @@ public class CheckinWindow {
 				// Gesamtstatistik erh�hen
 				came = came + 1;
 				System.out.println("T�gliche G�ste-Variable wurde erh�ht!");
+				updateStats = true;
 				btnSave.doClick();
 			}
 		});
